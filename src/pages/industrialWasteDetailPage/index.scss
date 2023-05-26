@@ -1,0 +1,24 @@
+@import '~@/mixin.scss';
+@import '~@/var.scss';
+
+.industrial-waste-detail-page {
+  min-height: 100vh;
+  background-color: $page-background-color;
+  padding-left: 16px;
+  padding-right: 16px;
+  @include iphonex-safe-padding-bottom-add(16px);
+  .industrail-waste--detail-tip {
+    padding: 23px 0;
+    font-size: 12px;
+    font-weight: 400;
+    color: $text-gray-color;
+    line-height: 22px;
+    text-align: center;
+    &-value {
+      color: $color-primary;
+    }
+  }
+  .bottom-tip {
+    padding-top: 38px;
+  }
+}

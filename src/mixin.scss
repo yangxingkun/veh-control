@@ -1,0 +1,49 @@
+@mixin ellipsis-line($n: 2) {
+  display: -webkit-box;
+  overflow: hidden;  
+  -webkit-line-clamp: $n;
+  -webkit-box-orient: vertical;
+}
+@mixin ellipsis() {
+  overflow: hidden;  
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin iphonex-safe-padding-bottom-minius($val: 15px) {
+  padding-bottom: calc(constant(safe-area-inset-bottom) - #{$val});
+  padding-bottom: calc(env(safe-area-inset-bottom) - #{$val});
+}
+
+@mixin iphonex-safe-padding-bottom-add($val: 15px) {
+  padding-bottom: calc(constant(safe-area-inset-bottom) + #{$val});
+  padding-bottom: calc(env(safe-area-inset-bottom) + #{$val});
+}
+
+@mixin iphonex-safe-padding-bottom() {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+$weightMap: (
+  400: Regular,
+  500: Medium,
+  300: Light,
+  600: Semibold
+);
+
+@mixin font-family($fontWeight: 400) {
+  $family: map-get($weightMap, $fontWeight);
+  font-family: PingFangSC-#{$family}, 
+    PingFang SC, -apple-system, BlinkMacSystemFont, 
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 
+    'Noto Sans', sans-serif, 'Apple Color Emoji', 
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  font-weight: $fontWeight;
+}
+
+@mixin background-cover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

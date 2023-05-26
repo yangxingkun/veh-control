@@ -1,0 +1,84 @@
+@import '~@/mixin.scss';
+
+.tag-header {
+  display: flex;
+  line-height: 1;
+  padding: 12px 15px 27px;
+  .tag-header-left {
+    flex: 0 0 auto;
+    width: 117px;
+    height: 117px;
+    background: #3388ff;
+    border-radius: 10px;
+    @include background-cover();
+  }
+
+  .tag-header-right {
+    flex: 1;
+    display: flex;
+    height: 117px;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 12px;
+  }
+
+  .tag-header-text {
+    font-size: 16px;
+    @include font-family(600);
+    color: #000000;
+    line-height: 20px;
+    margin-bottom: 7px;
+  }
+
+  .tag-header-desc {
+    flex: 1;
+    position: relative;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 22px;
+    max-height: 22 * 2px;
+    @include ellipsis-line(2);
+  }
+
+  .tag-header-button {
+    --nutui-button-default-height: 18px;
+    --nutui-button-default-font-size: 12px;
+    --nutui-icon-width: 15px;
+    --nutui-icon-height: 15px;
+    --nutui-icon-line-height: 15px;
+    --nutui-button-default-padding: 0;
+    --nutui-button-default-border-color: #d377cd;
+    --nutui-button-default-color: #d377cd;
+    width: 100px;
+    border-radius: 3px;
+    background-color: rgba(#d377cd, 0.25);
+    .nutui-iconfont {
+      font-size: 12px;
+    }
+    .h5-div {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+  }
+
+  .collect-icon {
+    line-height: 18px;
+  }
+  .tag-desc-container {
+    display: flex;
+    align-items: flex-end;
+  }
+  .tag-setting-button {
+    font-size: 14px;
+    color: #888888;
+    @include font-family(600);
+    line-height: 22px;
+    margin-left: 15px;
+    flex: 0 0 auto;
+  }
+  .tag-line {
+    
+  }
+}

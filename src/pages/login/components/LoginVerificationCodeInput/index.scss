@@ -1,0 +1,30 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.login-verificationCodeInput {
+  display: flex;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1PX solid $divider-color;
+  .input {
+    flex: 1;
+    font-size: 14px;
+    @include font-family(500);
+    color: $color-black;
+    line-height: 1;
+    padding: 0 6px;
+  }
+  .input-placehoder {
+    color: $text-gray-color;
+  }
+  .verification-button {
+    font-size: 14px;
+    @include font-family(500);
+    color: $color-primary;
+    line-height: 14px;
+    flex: 0 0 auto;
+    &.disabled {
+      color: $text-gray-color;
+    }
+  }
+}

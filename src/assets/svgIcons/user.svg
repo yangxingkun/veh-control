@@ -1,0 +1,12 @@
+<svg width="22px" height="22px" viewBox="0 0 22 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Combined Shape</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" fill-opacity="0.596637228">
+        <g id="发现" transform="translate(-334.000000, -184.000000)" fill="#FFFFFF">
+            <g id="信息流" transform="translate(4.000000, 168.000000)">
+                <g id="标签内容" transform="translate(186.000000, 0.000000)">
+                    <path d="M155,38 C161.075132,38 166,33.0751322 166,27 C166,20.9248678 161.075132,16 155,16 C148.924868,16 144,20.9248678 144,27 C144,33.0751322 148.924868,38 155,38 Z M155,29 C158.313708,29 161,31.2385763 161,34 L161,34 L149,34 C149,31.2385763 151.686292,29 155,29 Z M154.5,20 C156.985281,20 159,22.0147186 159,24.5 C159,26.9852814 156.985281,29 154.5,29 C152.014719,29 150,26.9852814 150,24.5 C150,22.0147186 152.014719,20 154.5,20 Z" id="Combined-Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

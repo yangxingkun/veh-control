@@ -1,0 +1,74 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.industrial-detail-page-Endurance {
+  margin-bottom: 12px;
+  &-content {
+    display: flex;
+    align-items: center;
+  }
+  &-chart {
+    position: relative;
+    flex: 0 0 auto;
+    width: 156px;
+    height: 178px;
+  }
+  .chart-pointer-container {
+    position: absolute;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+  }
+  .chart-text {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    font-size: 16px;
+    @include font-family(600);
+    color: $color-primary;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  .chart-name {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 1;
+    text-align: center;
+  }
+  .chart-pointer {
+    width: 9px;
+    height: 39px;
+    transform-origin: 50% 100%;
+    transform: rotate(225deg);
+  }
+  &-right {
+    flex: 1;
+  }
+  &-label {
+    &:first-child {
+      margin-bottom: 47px;
+    }
+  }
+  .label-title {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-black;
+    line-height: 14px;
+    margin-bottom: 7px;
+  }
+  .label-value {
+    font-size: 16px;
+    font-family: PingFangSC-Semibold, PingFang SC;
+    @include font-family(600);
+    color: $color-primary;
+    line-height: 20px;
+    &-small {
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1677307441152'); /* IE9*/
+  src: url('iconfont.eot?t=1677307441152#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url("iconfont.woff2?t=1677307441152") format("woff2"),
+  url("iconfont.woff?t=1677307441152") format("woff"),
+  url('iconfont.ttf?t=1677307441152') format('truetype');
+}
+  
+
+[class^="iconfont-"], [class*=" iconfont-"] {
+  font-family: 'iconfont' !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.iconfont-close_icon:before { content: "\ea01"; }
+.iconfont-down_icon:before { content: "\ea02"; }
+.iconfont-edit_icon:before { content: "\ea03"; }
+.iconfont-git:before { content: "\ea04"; }
+.iconfont-rise_icon:before { content: "\ea05"; }
+.iconfont-search_icon:before { content: "\ea06"; }
+.iconfont-tag:before { content: "\ea07"; }
+.iconfont-tag_icon2:before { content: "\ea08"; }
+.iconfont-tag_icon3:before { content: "\ea09"; }
+.iconfont-user:before { content: "\ea0a"; }
+
+$iconfont-close_icon: "\ea01";
+$iconfont-down_icon: "\ea02";
+$iconfont-edit_icon: "\ea03";
+$iconfont-git: "\ea04";
+$iconfont-rise_icon: "\ea05";
+$iconfont-search_icon: "\ea06";
+$iconfont-tag: "\ea07";
+$iconfont-tag_icon2: "\ea08";
+$iconfont-tag_icon3: "\ea09";
+$iconfont-user: "\ea0a";
+

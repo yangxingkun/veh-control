@@ -1,0 +1,34 @@
+@import '~@/mixin.scss';
+
+.avatar-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  background-color: #F0F3F7;
+  border-radius: 10px;
+  padding: 0 9px;
+  &-margin-bottom {
+    margin-bottom: 9px;
+  }
+}
+
+.avatar-placeholder {
+  font-size: 14px;
+  color: #000000;
+  line-height: 16px;
+}
+
+.avatar-upload {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  @include font-family(600);
+  color: #999999;
+  line-height: 14px;
+  &-icon {
+    font-size: 12px;
+    display: inline-block;
+    transform: rotate(90deg);
+  }
+}

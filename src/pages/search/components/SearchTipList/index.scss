@@ -1,0 +1,27 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.search-tip-list {
+  position: fixed;
+  top: 81px;
+  left: 0;
+  width: 100%;
+  bottom: 0;
+  padding: 0 4px;
+  box-sizing: border-box;
+  .wrapper {
+    background-color: #fff;
+    border-radius: 10px 10px 0px 0px;
+    padding: 0 11px;
+    box-sizing: border-box;
+    height: 100%;
+  }
+  .tip-list-item {
+    font-size: 14px;
+    @include font-family(600);
+    color: #000000;
+    line-height: 14px;
+    padding: 13px 0;
+    border-bottom: 1PX solid $divider-color;
+  }
+}

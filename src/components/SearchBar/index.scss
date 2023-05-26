@@ -1,0 +1,54 @@
+@import '~@/mixin.scss';
+@import '~@/var.scss';
+
+$gray-color: #F0F3F7;
+.car-control-search-bar {
+  background-color: #fff;
+  border-radius: 0 0 10px 10px;
+  padding: 24px 14px 13px;
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: $gray-color;
+    border-radius: 16px;
+    height: 31px;
+  }
+  .iconfont-search_icon {
+    flex: 0 0 auto;
+    font-size: 16px;
+    color: #888888;
+    padding-top: 10px;
+    padding-bottom:  10px;
+    padding-left: 12px;
+    padding-right: 7px;
+  }
+  .close-icon {
+    flex: 0 0 auto;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3;
+    padding-top: 10px;
+    padding-bottom:  10px;
+    padding-left: 7px;
+    padding-right: 12px;
+    &.show-close {
+      opacity: 1;
+    }
+  }
+  .iconfont-close_icon {
+    transform: scale((10 / 12));
+    color: #888888;
+  }
+  &-input {
+    flex: 1;
+    height: 100%;
+    font-size: 14px;
+    @include font-family(400);
+    color: #000000;
+    line-height: 1;
+  }
+  &-input-placeholder {
+    color: #888888;
+  }
+}

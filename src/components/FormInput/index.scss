@@ -1,0 +1,37 @@
+@import '~@/mixin.scss';
+
+.form-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #F0F3F7;
+  border-radius: 10px;
+  &-has-suffix {
+    padding-right: 9px;
+  }
+}
+
+.form-input-container-margin-bottom {
+  margin-bottom: 9px;
+}
+
+.form-input-placeholder {
+  font-size: 14px;
+  color: #999999;
+}
+
+.form-input {
+  font-size: 14px;
+  color: #000;
+  line-height: (16 / 14) * 1;
+  padding: 13px 9px;
+  flex: 1;
+}
+
+.form-textarea {
+  height: 131px;
+}
+
+.form-input-sufix {
+  flex: 0 0 auto;
+}

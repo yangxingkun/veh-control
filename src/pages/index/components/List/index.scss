@@ -1,0 +1,41 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.index-list {
+  &.list-hidden {
+    display: none;
+  }
+  &.list-visible {
+    display: flex;
+    flex-direction: column;
+  }
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 48px;
+  height: 100%;
+  box-sizing: border-box;
+  .search-bar-container {
+    flex: 0 0 auto;
+  }
+  .divider-container {
+    flex: 0 0 auto;
+    padding: 10px 12px;
+  }
+  .divider-line {
+    border-top: 1Px solid $divider-color;
+  }
+  .scroll-container {
+    flex: 1;
+    overflow: hidden;
+  }
+  .list-container {
+  }
+  .list-item {
+    display: inline-block;
+    vertical-align: top;
+    width: 182px;
+    box-sizing: border-box;
+  }
+}
+
+

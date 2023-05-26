@@ -1,0 +1,31 @@
+@import '~@/mixin.scss';
+
+.otherUser-page {
+  height: 100vh;
+  overflow: hidden;
+  .otherUser-collect-header {
+    font-size: 12px;
+    @include font-family(500);
+    color: #000000;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    line-height: 1;
+  }
+
+  .list-container {
+    padding-bottom: 10px;
+  }
+
+  .list-item {
+    width: 182px;
+    box-sizing: border-box;
+  }
+  .scroll-container {
+    padding-left: 4px;
+    padding-right: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+    @include iphonex-safe-padding-bottom-minius();
+  }
+}

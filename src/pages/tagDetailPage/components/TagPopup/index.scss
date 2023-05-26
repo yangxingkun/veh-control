@@ -1,0 +1,51 @@
+@import '~@/mixin.scss';
+@import '~@/var.scss';
+
+.industrial-waster-tag-popup {
+  .wrapper {
+    padding-bottom: 30px;
+  }
+  .desc {
+    font-size: 14px;
+    @include font-family(400);
+    color: #000000;
+    line-height: 20px;
+  }
+  .tag-title {
+    font-size: 12px;
+    @include font-family(500);
+    color: #999999;
+    line-height: 14px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  .tags-container {
+    margin: -5px -8px;
+  }
+  .tag-item {
+    display: inline-block;
+    vertical-align: top;
+    padding: 5px 8px;
+  }
+  .tag-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3px 10px;
+    background-color: #f0f3f7;
+    border-radius: 10px;
+    .iconfont-tag_icon2 {
+      margin-right: 5px;
+      color: $color-primary;
+    }
+    .tag-text {
+      font-size: 12px;
+      @include font-family(600);
+      color: #000000;
+      line-height: 1;
+    }
+  }
+  .tags-container2 {
+    margin-bottom: 25px;
+  }
+}

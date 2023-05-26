@@ -1,0 +1,43 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.value-card {
+  margin-bottom: 12px;
+  .content {
+    padding: 33px 0;
+  }
+  .content-wrapper {
+    display: flex;
+    height: 161px;
+  }
+  .content-left {
+    flex: 0 0 auto;
+    width: 142px;
+    height: 100%;
+    margin-right: 42px;
+    border-radius: 1px;
+    @include background-cover();
+  }
+  .content-right {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .right-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: #000000;
+    line-height: 14px;
+  }
+  .right-value {
+    font-size: 16px;
+    @include font-family(600);
+    color: $color-primary;
+    line-height: 20px;
+    margin-top: 4px;
+    &-small {
+      font-size: 12px;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.tag-detail-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: $page-background-color;
+  .tag-detail-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    @include iphonex-safe-padding-bottom-add(15px);
+  }
+  .detail-title {
+    font-size: 12px;
+    @include font-family(500);
+    color: $color-black;
+    padding-top: 25px;
+    padding-bottom: 12px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .error-feedback {
+    padding-top: 8px;
+  }
+}

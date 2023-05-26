@@ -1,0 +1,33 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.avatar {
+  &.selected {
+    .avatar-img {
+      border-color: $color-primary;
+    }
+    .avatar-text {
+      color: #000000;
+    }
+  }
+  .avatar-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1PX solid transparent;
+    margin-bottom: 13px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #F0F3F7;
+  }
+  .avatar-text {
+    text-align: center;
+    font-size: 18px;
+    @include font-family(600);
+    color: $text-gray-color;
+    line-height: 1;
+  }
+}

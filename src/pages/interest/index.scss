@@ -1,0 +1,48 @@
+@import '~@/mixin.scss';
+@import '~@/var.scss';
+
+.interest-page {
+  padding-top: 45px;
+  padding-left: 24px;
+  padding-right: 24px;
+  @include iphonex-safe-padding-bottom-add(93px);
+  .tittle {
+    font-size: 30px;
+    @include font-family(600);
+    color: #111111;
+    line-height: 1;
+  }
+  .subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    color: $text-gray-color;
+    line-height: 12px;
+    margin-top: 13px;
+  }
+  .grid {
+    padding: 50px 0;
+  }
+  .row {
+    margin: -16px -22px;
+  }
+  .col {
+    display: inline-block;
+    vertical-align: top;
+    width: 33.3333%;
+    box-sizing: border-box;
+    padding: 16px 22px;
+  }
+  .select-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 9px;
+    padding-left: 18px;
+    padding-right: 18px;
+    @include iphonex-safe-padding-bottom-add(40px);
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+}

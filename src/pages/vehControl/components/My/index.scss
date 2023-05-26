@@ -1,0 +1,40 @@
+@import '~@/mixin.scss';
+
+.my-page {
+  height: 100%;
+  overflow: hidden;
+  &.my-hidden {
+    display: none;
+  }
+  &.my-visible {
+    display: block;
+  }
+  .my-collect-header {
+    font-size: 12px;
+    @include font-family(500);
+    color: #000000;
+    padding-bottom: 12px;
+    padding-left: 16px;
+    padding-right: 16px;
+    line-height: 1;
+  }
+
+  .list-container {
+    padding-bottom: 10px;
+    box-sizing: content-box;
+  }
+
+  .list-item {
+    display: inline-block;
+    vertical-align: top;
+    width: 182px;
+    box-sizing: border-box;
+  }
+  .scroll-container {
+    padding-bottom: 48px;
+    padding-left: 4px;
+    padding-right: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+}

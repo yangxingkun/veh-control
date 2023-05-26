@@ -1,0 +1,39 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.detail-params-card {
+  padding: 16px 18px 0;
+  margin-bottom: 12px;
+  .detail-params-card-title {
+    font-size: 12px;
+    @include font-family(600);
+    color: $color-black;
+    padding-bottom: 8px;
+  }
+  .detail-params-item {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1PX solid rgba(#000, 0.05);
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .params-label {
+    flex: 0 0 auto;
+    font-size: 12px;
+    font-weight: 400;
+    color: #888888;
+    line-height: 22px;
+    width: 95px;
+    margin-right: 19px;
+  }
+  .params-text {
+    flex: 1;
+    font-size: 12px;
+    @include font-family(500);
+    color: $color-black;
+    line-height: 22px;
+  }
+}

@@ -1,0 +1,64 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.industrial-waste-card {
+  line-height: 1;
+  .industrial-waste-percent {
+    font-size: 36px;
+    line-height: 36px;
+    @include font-family(600);
+    color: #d377cd;
+  }
+
+  .industrial-chart {
+    height: 243px;
+    margin-bottom: 18px;
+    &.chart-hidden {
+      .f2-canvas {
+        display: none;
+      }
+    }
+  }
+
+  .no-data {
+    display: flex;
+    align-items: center;
+    padding: 25px 0;
+    justify-content: center;
+  }
+  .iconfont-tag_icon3 {
+    font-size: 14px;
+    
+    color: $color-pink;
+  }
+  .no-data-text {
+    font-size: 12px;
+    @include font-family(400);
+    color: #999999;
+    line-height: 14px;
+    margin-left: 6px;
+  }
+  .no-data-text-2 {
+    font-size: 12px;
+    @include font-family(500);
+    color: #999999;
+    line-height: 14px;
+  }
+
+  .industrial-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 69px;
+    height: 20px;
+    background-color: #f0f3f7;
+    border-radius: 9px;
+    font-size: 12px;
+    @include font-family(600);
+    color: $text-gray-color;
+    line-height: 1;
+    &:active {
+      background-color: darken($color: #f0f3f7, $amount: 2);
+    }
+  }
+}

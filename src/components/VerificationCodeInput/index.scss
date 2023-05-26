@@ -1,0 +1,14 @@
+@import '~@/mixin.scss';
+
+.verification-code-button {
+  font-size: 12px;
+  @include font-family(500);
+  color: #3388ff;
+  line-height: 14px;
+}
+
+.verification-code-remain {
+  font-size: 12px;
+  color: #888888;
+}
+

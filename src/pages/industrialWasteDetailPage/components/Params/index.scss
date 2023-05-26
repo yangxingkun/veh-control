@@ -1,0 +1,32 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.industrial-waste-detail-params {
+  padding: 18px;
+  margin-bottom: 12px;
+  .param-wrapper {
+    margin: -12px 0;
+  }
+  .param-item {
+    padding: 12px 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+  }
+  .param-title {
+    font-size: 12px;
+    @include font-family(500);
+    color: $color-black;
+    line-height: 14px;
+    &-gray {
+      color: $text-gray-color;
+    }
+    margin-bottom: 8px;
+  }
+  .param-value {
+    font-size: 16px;
+    @include font-family(600);
+    color: $color-pink;
+    line-height: 20px;
+  }
+}

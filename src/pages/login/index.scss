@@ -1,0 +1,32 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.login-page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  .login-header {
+    padding: 45px 24px;
+  }
+  .login-title {
+    font-size: 30px;
+    @include font-family(600);
+    color: #111111;
+    line-height: 1;
+    margin-bottom: 14px;
+  }
+  .login-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    color: $text-gray-color;
+    line-height: 12px;
+  }
+  .login-form {
+    padding: 0 18px;
+  }
+  .login-code-form-item {
+    padding-top: 29px;
+  }
+  .login-button {
+    margin-top: 180px;
+  }
+}
