@@ -16,14 +16,13 @@ export function useTabBarModel() {
   const router = useRouter();
   const model = useModel<IState>({
     state: {
-      activeIndex: router.params.activeMy ? 1 : 0,
+      activeIndex: router.params.activeMy ? 2 : 1,
       tabRenderedMap: {}
     },
     computed: [
       {
         keys: ['activeIndex'],
         hander: ({ activeIndex, tabRenderedMap }) => {
-          console.log(activeIndex, tabRenderedMap,"[][computed][[5]")
           return {
             tabRenderedMap: { ...tabRenderedMap, [activeIndex]: true },
           }
@@ -34,7 +33,6 @@ export function useTabBarModel() {
       {
         keys: ['activeIndex'],
         hander: ({ activeIndex }) => {
-          console.log(activeIndex,"[][watch][[5]")
           Taro.setNavigationBarTitle({
             title: TITLES[activeIndex],
           })
