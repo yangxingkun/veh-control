@@ -1,0 +1,43 @@
+@import '~@/var.scss';
+@import '~@/mixin.scss';
+
+.mechat{
+  .chat-wapper {
+    background-color: transparent;
+    &-body {
+      &-content {
+        .logo {
+          display: block;
+          width: 54px;
+          height: 68px;
+          // background-color: red;
+          animation: breathing 4s ease-in-out infinite;
+          /* 动画的名称为 breathing，持续时间为 4s，动画的速度为 ease-in-out，
+          动画效果无限循环 */
+        }
+        .title{
+          display: block;
+          width: 54px;
+          height: 68px;
+          background-color: skyblue;
+          animation: breathing 4s ease-in-out infinite;
+        }
+      }
+    }
+  }
+  /* 定义一个名为 breathing 的动画 */
+  @keyframes breathing {
+    0% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(0.7);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  /* 定义一个名为 breathing 的动画 */
+
+}
+

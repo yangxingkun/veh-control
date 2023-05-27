@@ -3,7 +3,6 @@ export default defineAppConfig({
   //   'pages/index/index'
   // ],
   pages: [
-    // 'pages/vehControl/index',
     'pages/index/index',
     'pages/userAgreement/index',
     'pages/search/index',
@@ -12,6 +11,8 @@ export default defineAppConfig({
     'pages/auth/index',
     'pages/tagDetailPage/index',
     'pages/industrialWasteDetailPage/index',
+    'pages/meControlChatPage/index',
+
   ],
   // subpackages: [
   //   {
@@ -38,4 +39,5 @@ export default defineAppConfig({
   usingComponents: {
     cell: 'plugin://contactPlugin/cell',
   }
+  // https://mp.weixin.qq.com/wxopen/plugindevdoc?appid=wx104a1a20c3f81ec2&token=&lang=zh_CN
 })

@@ -23,19 +23,23 @@ const Index = () => {
     const userInfo = myModel.getState().userInfo!;
     return {
       title: '',
-      path: `/pages/tagDetailPage/index?type=${TemplateType.user}&materialCode=${userInfo.materialCode}&templateCode=${userInfo.templateCode}&templateName=${userInfo.templateName}`
-    }
+      path: `/pages/tagDetailPage/index?type=${TemplateType.user}&materialCode=${userInfo.materialCode}&templateCode=${userInfo.templateCode}&templateName=${userInfo.templateName}`,
+    };
   });
   const tabbarModel = useTabBarModel();
   const { activeIndex, tabRenderedMap } = tabbarModel.useGetState();
-  const tabPannels = [List,MeControl, My];
+  const tabPannels = [List, MeControl, My];
+
   return (
     <View className="index-page page">
       {tabPannels.map((Comp, index) => {
         if (!tabRenderedMap[index]) return null;
         // @ts-ignore
-        return <Comp key={index} myModel={myModel} visible={activeIndex === index} />;
+        return (
+          <Comp key={index} myModel={myModel} visible={activeIndex === index} />
+        );
       })}
+
       <View className="index-tabbar-container">
         <Tabbar
           visible={activeIndex}

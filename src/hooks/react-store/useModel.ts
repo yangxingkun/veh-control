@@ -200,6 +200,8 @@ export class Model<
     });
     return state;
   };
+
+  
   subscribeWithKeys<Key extends keyof TState & string>(
     func: TSubscribeFunc<TState, TEffects>,
     options: { keys?: Key[]; equalityFn?: TEqualityFn<TState>; name?: string }
