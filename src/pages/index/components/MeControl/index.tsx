@@ -7,8 +7,9 @@ import { templateSearchPage } from '@/api/template'
 import './index.scss';
 import { TemplateListItem } from '@/types/template';
 import { useEffect, useRef, useState } from 'react';
+import AddFriend from '@/components/AddFriend';
 
-import { Dialog } from '@nutui/nutui-react-taro';
+import { Dialog, Icon } from '@nutui/nutui-react-taro';
 const List = ({ visible }) => {
   console.log(visible, "7987")
   const isFirstRef = useRef(true);
@@ -41,7 +42,7 @@ const List = ({ visible }) => {
   const jumpLoadingAnimate = () => {
   }
   return (
-    <View className={classNames('index-list', visible ? 'list-visible' : 'list-hidden')}>
+    <View className={classNames('index-meControl')}>
       {/* Taro.navigateTo({
                         url: `/pages/tagDetailPage/index?type=${item.type}&materialCode=${item.materialCode}&templateCode=${item.templateCode}&templateName=${item.templateName}`
       }) */}
@@ -63,10 +64,17 @@ const List = ({ visible }) => {
           确定
         </Button>
         <View className="mark">
-          <Text>暂无内测码</Text>
-          <Text className="herf" onClick={jumpLoadingAnimate}>
-            联系我们
-          </Text>
+          <Text className='mark-text'>暂无内测码</Text>
+          <View className='mark-service'>
+            <AddFriend
+              text="客服中心"
+              showDivider={false}
+              icon={
+                <Icon className="customer-service-icon" name="triangle-up" />
+              }
+              className={'customer-service'}
+            />
+          </View>
         </View>
       </div>
       <Dialog

@@ -1,0 +1,85 @@
+{
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.fontSize": 12,
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[scss]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "less.validate": false,
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "stylelint.validate": [
+      "css",
+      "less",
+      "postcss",
+      "scss",
+      "sass",
+      "vue"
+    ],
+    "stylelint.enable": true,
+    "stylelint.snippet": [
+      "css",
+      "less",
+      "postcss",
+      "scss"
+    ],
+    "[less]": {
+      "editor.defaultFormatter": "stylelint.vscode-stylelint"
+    },
+    "redhat.telemetry.enabled": true,
+    "xml.server.binary.trustedHashes": [
+      "f649abba9dd1c41d1a2487a32250adfb88f7da141058e6573e5818752e83da2a"
+    ],
+    "[xml]": {
+      "editor.defaultFormatter": "fabianlauer.vs-code-xml-format"
+    },
+    "workbench.editorAssociations": {
+      "*.wasm": "default"
+    },
+    "go.autocompleteUnimportedPackages": true,
+    "go.gocodePackageLookupMode": "go",
+    "go.gotoSymbol.includeImports": true,
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "prettier.singleQuote": true,
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.quoteStyle": "single",
+    "files.associations": {
+      "*.cjson": "jsonc",
+      "*.wxss": "css",
+      "*.wxs": "javascript"
+    },
+    "emmet.includeLanguages": {
+      "wxml": "html",
+      "md": "tsx"
+    },
+    "minapp-vscode.disableAutoConfig": true,
+    "mdx.experimentalLanguageServer": true,
+    "[markdown]": {
+      "editor.quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+      }
+    },
+    "workbench.startupEditor": "none"
+  }
+  

@@ -1,15 +1,12 @@
 @import '~@/var.scss';
 @import '~@/mixin.scss';
 
-.index-list {
-  &.list-hidden {
-    display: none;
-  }
-  &.list-visible {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-  }
+.index-meControl {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  height: 100%;
+
   .wrapper-input {
     border: 1px solid #eff3f6;
     border-radius: 100px;
@@ -20,7 +17,7 @@
     background-color: #F0F3F7;
     margin-bottom: 22px;
     padding-left: 10px;
-    text-align: center;   
+    text-align: center;
     letter-spacing: 2px;
     font-size: 14px;
     font-weight: 500;
@@ -41,10 +38,12 @@
     font-size: 18px;
     letter-spacing: 4px;
     transition: all ease 0.3;
-    &:active{
+
+    &:active {
       background-color: $color-primary;
     }
   }
+
   .logo {
     display: block;
     width: 54px;
@@ -52,15 +51,18 @@
     margin: 0 auto;
     margin-top: 77px;
   }
-  .title{
+
+  .title {
     width: 100%;
     text-align: center;
     margin: 0 auto;
     font-size: 30px;
-    font-weight: bolder;
+    // font-weight: bolder;
     margin: 21px 0;
+    @include font-family(600);
 
   }
+
   .desc {
     width: 100%;
     text-align: center;
@@ -72,15 +74,35 @@
     color: #999;
     font-weight: 400;
   }
+
   .mark {
     font-size: 12px;
     color: #888;
     margin: 0 auto;
     display: flex;
     justify-content: center;
-
-    .herf {
-      color: #1890ff;
+    align-items: center;
+    @include font-family(300);
+    .mark-text {
+      display: block;
+      margin-right: 2px;
+    }
+    &-service{
+      color: #3388FF;
+      .customer-service {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        color: #999999;
+        @include font-family(300);
+        line-height: 1;
+        &-icon {
+          font-size: 12px;
+          display: inline-block;
+          transform: rotate(90deg);
+        }
+      }
     }
   }
 }
