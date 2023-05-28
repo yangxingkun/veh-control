@@ -8,7 +8,7 @@ interface IState {
   }
 }
 const TITLES = [
-  '首页',
+  '发现',
   '咪控',
   '我的',
 ]

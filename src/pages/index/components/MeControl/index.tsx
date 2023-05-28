@@ -11,7 +11,6 @@ import './index.scss';
 
 import { Dialog, Radio } from '@nutui/nutui-react-taro';
 const List = ({ visible }) => {
-  console.log(visible, '7987');
   const [visible1, setVisible] = useState(false);
   const [radioVal] = useState('1');
 
@@ -58,18 +57,18 @@ const List = ({ visible }) => {
           确定
         </Button>
         <View className="mark">
-          <Text className="mark-text">暂无内测码</Text>
+          {/* <Text className="mark-text"></Text> */}
           <AddFriend
-            text="请联系我们"
+            text="暂无内测码 请联系我们"
             showDivider={false}
             className="mark-customer-service"
             icon={<Icon name="triangle-up" />}
           />
         </View>
-        <Radio.RadioGroup value={radioVal} direction='horizontal'>
+        {/* <Radio.RadioGroup value={radioVal} direction='horizontal'>
           <Radio value="1">是</Radio>
           <Radio value="2">否</Radio>
-        </Radio.RadioGroup>
+        </Radio.RadioGroup> */}
       </div>
       <Dialog
         title="内测码错误"

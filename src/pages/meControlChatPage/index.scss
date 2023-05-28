@@ -1,43 +1,95 @@
 @import '~@/var.scss';
 @import '~@/mixin.scss';
 
-.mechat{
-  .chat-wapper {
-    background-color: transparent;
-    &-body {
-      &-content {
-        .logo {
-          display: block;
-          width: 54px;
-          height: 68px;
-          // background-color: red;
-          animation: breathing 4s ease-in-out infinite;
-          /* 动画的名称为 breathing，持续时间为 4s，动画的速度为 ease-in-out，
-          动画效果无限循环 */
-        }
-        .title{
-          display: block;
-          width: 54px;
-          height: 68px;
-          background-color: skyblue;
-          animation: breathing 4s ease-in-out infinite;
-        }
-      }
-    }
-  }
-  /* 定义一个名为 breathing 的动画 */
-  @keyframes breathing {
-    0% {
-      transform: scale(1);
-    }
-    70% {
-      transform: scale(0.7);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
-  /* 定义一个名为 breathing 的动画 */
+.mechat-page {
+  width: 100vw;
+  height: 100vh;
+  // 没有起作用scrollView
+  display: flex;
+  flex-direction: column;
+  background-color: #F5F5F5;
 
+  .breath-waper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    .logo{
+      display: block;
+      width: 51px;
+      height: 51px;
+    }
+  }
+  .chat {
+    width: 96%;
+    height: 1px;
+    margin: 0 auto;
+    flex-grow: 1;
+  }
+
+  .user {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+  }
+
+  .assistant {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .avatar {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-right: 5px;
+  }
+
+  .user-avatar {
+    width: 30px;
+    height: 30px;
+    background-color: #df4;
+    border-radius: 10px;
+    margin-left: 5px;
+  }
+
+  .user .content {
+    background-color: #8ae75c;
+  }
+
+  .content {
+    width: 80%;
+    font-size: 14px;
+    background-color: #fff;
+    padding: 15px 15px;
+    border-radius: 5px;
+  }
+
+  .chatbox {
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 6px 16px 40px 16px;
+    position: fixed;
+    bottom: 0;
+  }
+
+  .input {
+    width: 96%;
+    height: 50px;
+    padding: 15px 5px;
+    background: #F0F3F7;
+    border-radius: 4px;
+    margin-right: 5px;
+  }
+
+  .send {
+    width: 31px;
+    height: 31px;
+
+  }
 }
-
