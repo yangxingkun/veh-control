@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { Button, Overlay, Animate } from '@nutui/nutui-react-taro';
 import { ScrollView, View, Textarea, Text } from '@tarojs/components';
-
+import Taro from '@tarojs/taro';
 import './index.scss';
 const Index = () => {
-  const messages = [
+  const messagesInit = [
     { "role": "assistant", "content": "You are a helpful assistant." },
     { "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?" },
     { "role": "assistant", "content": "You are a helpful assistant." },
@@ -18,26 +18,62 @@ const Index = () => {
     { "role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020." },
     { "role": "user", "content": "Where was it played?" }
   ]
-  const [value, setValue] = useState(null)
+  const [value, setValue] = useState('')
+  const [messages, setMessages] = useState(messagesInit)
   const visibleRef = useRef(false)
   const copyText = (first) => {
     console.log(first)
     // visibleRef.current = false
   }
-  const send = () => {
+  const sendMessageService = (e) => {
+    // console.log("333", e, value)
+    if (!/^\s*$/.test(value)) {
+      setMessages((prev)=>([...prev, { "role": "user", "content": value}]))
+      setValue('')
+      // wx.request({
+      //   url: 'http://127.0.0.1:8080/chat',
+      //   method: 'POST',
+      //   data: {
+      //     content: this.data.messages,
+      //   },
+      //   header: {
+      //     'content-type': 'application/json'
+      //   },
+      //   success: (res) => {
+      //     this.data.messages.push(res.data.message)
+      //     this.setData({
+      //       messages: this.data.messages
+      //     });
+      //   }
+      // })
+    } else {
+      Taro.showToast({
+        title: '输入不可为空',
+        duration: 500,
+        icon: 'none'
+      });
+    }
 
   }
-  const handleInput = () => {
-
+  const handleInput = (e) => {
+    setValue(e.detail.value)
   }
-  // useEffect(()=>{
-  //   if(visible){
-  //    setVisible(false)
-  //   }
-  // },[visible])
+  useEffect(() => {
+
+    visibleRef.current = true
+    setTimeout(() => {
+      visibleRef.current = false
+    }, 3000)
+  }, [])
+  useEffect(() => {
+    console.log("first", visibleRef.current)
+
+  }, [])
+
   return (
     <View className='mechat-page'>
       <ScrollView
+        scrollIntoView={"emptyC"}
         scrollY
         style={{ height: '100%' }} className="chat">
         {messages.map((item, index) => {
@@ -58,25 +94,30 @@ const Index = () => {
             </View>
           );
         })}
-        <View style={{ height: '100px' }}></View>
-        
+        <div style={{ height: '100px' }} id='emptyC'></div>
+
       </ScrollView>
       <View className="chatbox">
         {/* adjustPosition={true} */}
         {/* autoHeight */}
         {/* closeOnClickOverlay={true}  */}
-        <Textarea className="input" cursorSpacing={40} fixed={true} onInput={() => {
-          handleInput()
-        }} value={value} show-confirm-bar={false} limitshow maxlength={200} />
-        <img className="send" src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onClick={() => {
-          send()
+        <Textarea className="input" cursorSpacing={50} fixed={true} onFocus={(e) => {
+          console.log(e)
+          setTimeout(() => {
+            Taro.pageScrollTo({
+              selector: "#emptyC",
+              duration: 0,
+            })
+          }, 0)
+        }} onInput={(e) => {
+          handleInput(e)
+        }} value={value} show-confirm-bar={false} maxlength={200} />
+        <img className="send" src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onClick={(e) => {
+          sendMessageService(e)
         }}> </img>
       </View>
       {visibleRef.current && <Overlay visible={visibleRef.current} closeOnClickOverlay={true} onClick={() => {
-        // console.log(visible)
-        // setVisible(false)
-        // copyText
-        visibleRef.current=false
+        visibleRef.current = false
       }} overlayClass={'breath-waper'}>
         <Animate type="breath" loop={true}>
           <img

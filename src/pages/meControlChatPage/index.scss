@@ -25,6 +25,12 @@
     height: 1px;
     margin: 0 auto;
     flex-grow: 1;
+    ::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+      color: transparent;
+    }
   }
 
   .user {
@@ -81,12 +87,11 @@
   .input {
     width: 96%;
     height: 50px;
-    padding: 15px 5px;
+    padding: 8px 5px;
     background: #F0F3F7;
     border-radius: 4px;
-    margin-right: 5px;
+    margin-right: 8px;
   }
-
   .send {
     width: 31px;
     height: 31px;
