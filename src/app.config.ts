@@ -3,7 +3,6 @@ export default defineAppConfig({
   //   'pages/index/index'
   // ],
   pages: [
-    // 'pages/vehControl/index',
     'pages/index/index',
     'pages/userAgreement/index',
     'pages/search/index',
@@ -12,6 +11,7 @@ export default defineAppConfig({
     'pages/auth/index',
     'pages/tagDetailPage/index',
     'pages/industrialWasteDetailPage/index',
+    'pages/meControlChat/index',
   ],
   // subpackages: [
   //   {
