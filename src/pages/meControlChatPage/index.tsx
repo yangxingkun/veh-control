@@ -59,6 +59,7 @@ const Index = () => {
           );
         })}
         <View style={{ height: '100px' }}></View>
+        
       </ScrollView>
       <View className="chatbox">
         {/* adjustPosition={true} */}
