@@ -18,12 +18,15 @@ const Transition = ({
   duration = 300,
   ...props
 }: TransitionProps) => {
+
   const propsRef = useLatest(props);
+
   const transitionModel = useModel<ITransitionState>({
     state: {
       status: ETransitionStatus.exited,
     },
   });
+
   const transitionClassNames = useMemo(() => {
     let baseClassNames: string[];
     if (!transitionName) {
@@ -39,10 +42,15 @@ const Transition = ({
       return classNames;
     })
   }, [transitionName]);
+
   const { status } = transitionModel.useGetState();
+
   const transitionClassNamesWithStatus = useMemo(() => {
     return transitionClassNames.map(item => item[status])
   }, [transitionClassNames, status])
+
+
+  
   const transitionTimerRef = useRef<any>();
   const enteringTimerRef = useRef<any>();
   useEffect(() => {

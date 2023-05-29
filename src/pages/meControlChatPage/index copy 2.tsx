@@ -1,11 +1,7 @@
 import { useState, useRef, useEffect, useReducer, useCallback } from 'react';
 import { Button, Overlay, Animate } from '@nutui/nutui-react-taro';
-import { ScrollView, View, Textarea, Text ,Image} from '@tarojs/components';
+import { ScrollView, View, Textarea, Text } from '@tarojs/components';
 import Taro, { useReady } from '@tarojs/taro';
-import Transition from '@/components/Transition';
-import closeIconSvg from '@/assets/svg/close_icon_circle.svg';
-import classNames from 'classnames';
-
 import './index.scss';
 
 const messagesInit = [
@@ -24,12 +20,10 @@ const messagesInit = [
 ]
 const Index = () => {
   const [value, setValue] = useState('')
-  // const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(true)
   const [messages, setMessages] = useState(messagesInit)
   // const [state, toDispatch] = useReducer(reducer, initialState);
   // const visibleRef = useRef(true)
-  const [visible, setVisible] = useState(false);
-  const timerRef = useRef<any>();
   console.log('render')
   const methods = {
     handleFocusScrollToEnd() {
@@ -45,20 +39,11 @@ const Index = () => {
       console.log(e)
       // visibleRef.current = false
     },
-    // handleOverLay: useCallback(()=> {
-    //     setVisible(false)
-    // },[visible])
+    handleOverLay: useCallback(()=> {
+        setVisible(false)
+    },[visible])
   }
 
-
-  useEffect(() => {
-    timerRef.current = setTimeout(() => {
-      setVisible(true);
-    }, 300);
-    return () => {
-      clearTimeout(timerRef.current);
-    }
-  }, [])
 
   // useEffect(() => {
   //   if (visible) {
@@ -145,7 +130,7 @@ const Index = () => {
         {/* adjustPosition={true} */}
         {/* autoHeight */}
         {/* closeOnClickOverlay={true}  */}
-
+        
         <span>{visible}</span>
         <Textarea className="input" cursorSpacing={50} fixed={true} onFocus={() => {
           methods.handleFocusScrollToEnd()
@@ -156,39 +141,17 @@ const Index = () => {
           sendMessageService()
         }}> </img>
       </View>
-      {/* <Overlay visible={visible} closeOnClickOverlay={true} onClick={() => {
+      <Overlay visible={visible} closeOnClickOverlay={true} onClick={() => {
         methods.handleOverLay()
       }} overlayClass={'breath-waper'}>
         <Animate type="breath" loop={true}>
-
+         
           <img
             className="logo"
             src="http://152.136.205.136:9000/vehicle-control/font/Shape.svg"
           />
         </Animate>
-      </Overlay> */}
-      <Transition visible={visible} transitionName="fade-in">
-        {
-          (_, transitionClassName) => {
-            return (
-              <div className={classNames('auth-popup', transitionClassName)}>
-                <div className="auth-popup-img-container">
-                  <div className="auth-popup-text">
-                    <div className="auth-popup-title">首次注册</div>
-                    <div className="auth-popup-subtitle">即送装备徽章</div>
-                  </div>
-                  <Image mode="aspectFit" className="auth-popup-img" src="http://152.136.205.136:9000/vehicle-control/font/huodong%402x.png" alt="" />
-                  <div onClick={() => {
-                    setVisible(false);
-                  }} className="auth-popup-close">
-                    <img className="close-icon" src={closeIconSvg} />
-                  </div>
-                </div>
-              </div>
-            )
-          }
-        }
-      </Transition>
+      </Overlay>
     </View>
   );
 };

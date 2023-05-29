@@ -97,4 +97,61 @@
     height: 31px;
 
   }
+
+  .auth-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  .auth-popup-img-container {
+    position: absolute;
+    top: 53px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .auth-popup-img {
+    width: 338 / 736 * 100vh;
+    height: 534 / 736 * 100vh;
+  }
+  .auth-popup-text {
+    position: absolute;
+    top: 76 / 736 * 100vh;
+    left: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .auth-popup-title {
+    font-size: 30 / 736 * 100vh;
+    @include font-family(600);
+    color: #ffffff;
+    line-height: (20 / 30);
+  }
+  .auth-popup-subtitle {
+    font-size: 16px;
+    @include font-family(400);
+    color: #ffffff;
+    line-height: 12px;
+    margin-top: 19px;
+  }
+  .auth-popup-close {
+    position: absolute;
+    left: 50%;
+    bottom: -42px;
+    transform: translateX(-50%);
+  }
+  .close-icon {
+    display: block;
+    width: 26px;
+    height: 26px;
+  }
+
+
+
 }
