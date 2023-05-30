@@ -32,6 +32,7 @@ export function useTabsModel() {
       {
         keys: ['activePanel'],
         hander: ({ activePanel, tabItems }) => {
+          debugger
           return {
             selectedTabItem: tabItems.find(
               (item) => item.panelKey === activePanel
