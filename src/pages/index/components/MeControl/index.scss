@@ -1,11 +1,13 @@
 @import '~@/var.scss';
 @import '~@/mixin.scss';
 
-.index-list {
-  &.list-hidden {
+.index-meControl {
+  width: 100vw;
+  height: 100vh;
+  &.meControl-hidden {
     display: none;
   }
-  &.list-visible {
+  &.meControl-visible {
     display: flex;
     flex-direction: column;
     background-color: #fff;

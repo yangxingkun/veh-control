@@ -27,6 +27,7 @@ type TService<TDataItem extends any> = (
   total: number;
   rows?: TDataItem[];
 } | null>;
+
 export function useInfiniteScroll<TDataItem extends any = any>(
   service: TService<TDataItem>,
   options?: {

@@ -1,19 +1,19 @@
-import { View, Text, Input,Button } from '@tarojs/components';
-
-import Taro from '@tarojs/taro';
-import classNames from 'classnames';
-
 import { useEffect, useRef, useState } from 'react';
+import Taro from '@tarojs/taro';
+import { View, Text, Input,Button } from '@tarojs/components';
 import AddFriend from '@/components/AddFriend';
-import { Icon} from '@nutui/nutui-react-taro';
-
+import { Dialog, Radio,Icon } from '@nutui/nutui-react-taro';
+import classNames from 'classnames';
+import { getToken } from '@/utils/token';
+import Redirect from '@/components/Redirect';
 import './index.scss';
 
-import { Dialog, Radio } from '@nutui/nutui-react-taro';
-const List = ({ visible }) => {
+const List = ({ visible, myModel }) => {
   const [visible1, setVisible] = useState(false);
   const [radioVal] = useState('1');
-
+  const { isLogin, loginChecking} =
+    myModel.useGetState();
+    const token = getToken();
   useEffect(() => {}, [radioVal]);
   const handleModal = () => {
     switch (radioVal) {
@@ -29,11 +29,14 @@ const List = ({ visible }) => {
         break;
     }
   };
+  if (!token || (!loginChecking && !isLogin)) {
+    return <Redirect to="/pages/auth/index" />;
+  }
   return (
     <View
       className={classNames(
-        'index-list',
-        visible ? 'list-visible' : 'list-hidden'
+        'index-meControl',
+        visible ? 'meControl-visible' : 'meControl-hidden'
       )}
     >
       <div>
