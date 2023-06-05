@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect, useReducer, useCallback } from 'react';
 import { View, ScrollView, Text, Textarea } from '@tarojs/components';
-import Taro, {  } from '@tarojs/taro';
+import Taro, { } from '@tarojs/taro';
 import PromptDialog from "./components/PromptDialog"
 import OverlayLoading from "./components/OverlayLoading"
+import { questionBychat } from '@/api/chat'
+import classNames from 'classnames';
+
 import './index.scss';
 const messagesInit = [
   { "role": "assistant", "content": "You are a helpful assistant." },
@@ -34,17 +37,21 @@ const Index = () => {
         .node()
         .exec((res) => {
           const scrollView = res[0].node
+          // scrollView.scrollTo({
+          //   top:100
+          // })
           scrollView.scrollIntoView('#chat_panel_last_view_id')
         })
     },
-    handleCopyText(e) {
-      // visibleRef.current = false
-    }
   }
-  const sendMessageService = () => {
+  const sendMessageService = async () => {
     if (!/^\s*$/.test(value)) {
       setMessages((prev) => ([...prev, { "role": "user", "content": value }]))
       setValue('')
+      let { message } = await questionBychat({ question: value })
+      if (message) {
+        setMessages((prev) => ([...prev, { "role": "assistant", "content": message }]))
+      }
       methods.handleFocusScrollToEnd()
     } else {
       Taro.showToast({
@@ -56,12 +63,16 @@ const Index = () => {
   }
 
   const onRefresh = (e) => {
-    if (refreshTrigger) {
-      return;
-    }
-    setRefreshTrigger(true);
-    console.log(e)
+    setRefreshTrigger(true); // 在下拉刷新被触发时重新设置下拉刷新状态
+    console.log(e, '自定义下拉刷新被触发')
+    setTimeout(() => {
+      setRefreshTrigger(false);
+    }, 2000)
   };
+
+  const handleScrollToUpper = (e) => {
+    console.log(e, '滚动到🆙部上拉加载')
+  }
   useEffect(() => {
     timerRef.current = setTimeout(() => {
       setShowObj((pre) => ({ ...pre, ...{ showLoading: false, showPrompt: true } }))
@@ -72,14 +83,17 @@ const Index = () => {
   }, [])
   return (
     <>
-      {!showObj.showLoading && (<View className='mechat-page'>
+      <View className={classNames('mechat-page', showObj.showLoading ? 'mechat-hidden' : 'mechat-visible')}>
         <ScrollView
           enhanced={true}
-          // scrollIntoView={"chat_panel_last_view_id"}
+          scrollIntoView={"chat_panel_last_view_id"}
           scrollY
+          upperThreshold={200}
+          lowerThreshold={200}
           refresherEnabled={true}
           refresherTriggered={refreshTrigger}
           onRefresherRefresh={onRefresh}
+          onScrollToUpper={handleScrollToUpper}
           id="chat_panel_div_class_find_id"
           style={{ height: '100%' }} className="chat">
           {messages.map((item, index) => {
@@ -88,20 +102,19 @@ const Index = () => {
                 {
                   item.role == 'user' && <View className="user" >
                     <img className="user-avatar" src="http://152.136.205.136:9000/vehicle-control/font/Shape.svg"></img>
-                    <Text className="content" onClick={(e) => { methods.handleCopyText(e) }} >{item.content}</Text>
+                    <Text className="content">{item.content}</Text>
                   </View>
                 }
                 {
                   item.role == 'assistant' && <View className="assistant" >
                     <img className="avatar" src="http://152.136.205.136:9000/vehicle-control/font/Shape.svg"></img>
-                    <Text className="content" onClick={(e) => { methods.handleCopyText(e) }}>{item.content}</Text>
+                    <Text className="content">{item.content}</Text>
                   </View>
                 }
               </View>
             );
           })}
           <div style={{ height: '100px', background: 'red' }} id="chat_panel_last_view_id"></div>
-
         </ScrollView>
         <View className="chatbox">
           <Textarea className="input" cursorSpacing={50} fixed={true} onFocus={() => {
@@ -109,16 +122,16 @@ const Index = () => {
           }} onInput={(e) => {
             setValue(e.detail.value)
           }} value={value} show-confirm-bar={false} maxlength={200} />
-          <img className="send" src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onTouchStart={(e) => {
+          <img className="send" src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onClick={(e) => {
             // e.preventDefault()
-            e.defaultPrevented = true
+            // e.defaultPrevented = true
             console.log(
               e
             )
             sendMessageService()
           }} > </img>
         </View>
-      </View>)}
+      </View>
       <PromptDialog showPrompt={showObj.showPrompt} setShowObj={setShowObj}></PromptDialog>
       <OverlayLoading showLoading={showObj.showLoading}></OverlayLoading>
     </>

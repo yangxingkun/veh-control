@@ -23,7 +23,7 @@ export function useTabBarModel() {
       {
         keys: ['activeIndex'],
         hander: ({ activeIndex, tabRenderedMap }) => {
-          console.log({ ...tabRenderedMap, [activeIndex]: true },"{ ...tabRenderedMap, [activeIndex]: true }")
+          // console.log({ ...tabRenderedMap, [activeIndex]: true },"{ ...tabRenderedMap, [activeIndex]: true }")
           return {
             tabRenderedMap: { ...tabRenderedMap, [activeIndex]: true },
           }

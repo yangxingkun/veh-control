@@ -27,7 +27,12 @@
   display: flex;
   flex-direction: column;
   background-color: #F5F5F5;
-
+  &.mechat-hidden {
+    display: none;
+  }
+  &.mechat-visible {
+    display: block;
+  }
   .chat {
     width: 96%;
     height: 1px;

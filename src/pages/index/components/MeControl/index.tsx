@@ -1,29 +1,64 @@
 import { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
-import { View, Text, Input,Button } from '@tarojs/components';
+import { View, Text, Input, Button } from '@tarojs/components';
 import AddFriend from '@/components/AddFriend';
-import { Dialog, Radio,Icon } from '@nutui/nutui-react-taro';
+import { Dialog, Radio, Icon } from '@nutui/nutui-react-taro';
 import classNames from 'classnames';
 import { getToken } from '@/utils/token';
 import Redirect from '@/components/Redirect';
+import { verifyChatCode } from '@/api/chat'
+import { getUserInfo } from '@/utils/user';
 import './index.scss';
 
+
+
+
+const CustomDialog = ({ isShow, setIsShow }) => {
+  return (
+    <Dialog
+      className='custom-dialog'
+      title="内测码错误"
+      textAlign="center"
+      noCancelBtn={true}
+      visible={isShow.show}
+      onOk={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}
+      // onCancel={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}
+      okText="我知道了"
+    // footerDirection="vertical"
+    >
+      <div>
+        <div>请重新输入联系我们</div>
+        <div>获取内测码</div>
+      </div>
+    </Dialog>
+  )
+}
+
+
+
+
+
+
 const List = ({ visible, myModel }) => {
-  const [visible1, setVisible] = useState(false);
-  const [radioVal] = useState('1');
-  const { isLogin, loginChecking} =
-    myModel.useGetState();
-    const token = getToken();
-  useEffect(() => {}, [radioVal]);
-  const handleModal = () => {
-    switch (radioVal) {
-      case '1':
+ 
+  const { isLogin, loginChecking } = myModel.useGetState();
+  const token = getToken();
+  const userInfo: any = getUserInfo()
+  const [isShow, setIsShow] = useState({
+    show: false,
+    message: ''
+  });
+  const [value, setValue] = useState('8M6fzH');
+  const handleModal = async () => {
+    let { verified, message } = await verifyChatCode({ code: value, user: userInfo.userCode })
+    switch (verified) {
+      case true:
         Taro.navigateTo({
           url: `/pages/meControlChatPage/index?code=${'1'}`,
         });
         break;
-      case '2':
-        setVisible(true);
+      case false:
+        setIsShow((pre) => ({ ...pre, ...{ show: true, message } }))
         break;
       default:
         break;
@@ -51,6 +86,10 @@ const List = ({ visible, myModel }) => {
           <span>功能内测中请输入内测码使用</span>
         </div>
         <Input
+          value={value}
+          onInput={(e) => {
+            setValue(e.detail.value);
+          }}
           className="wrapper-input"
           type="text"
           placeholder="请输入内测码"
@@ -68,26 +107,8 @@ const List = ({ visible, myModel }) => {
             icon={<Icon name="triangle-up" />}
           />
         </View>
-        {/* <Radio.RadioGroup value={radioVal} direction='horizontal'>
-          <Radio value="1">是</Radio>
-          <Radio value="2">否</Radio>
-        </Radio.RadioGroup> */}
       </div>
-      <Dialog
-        title="内测码错误"
-        textAlign="center"
-        noCancelBtn={true}
-        visible={visible1}
-        onOk={() => setVisible(false)}
-        onCancel={() => setVisible(false)}
-        okText="我知道了"
-        footerDirection="vertical"
-      >
-        <div>
-          <div>请重新输入联系我们</div>
-          <div>获取内测码</div>
-        </div>
-      </Dialog>
+      <CustomDialog isShow={isShow} setIsShow={setIsShow} ></CustomDialog>
     </View>
   );
 };

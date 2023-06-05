@@ -94,6 +94,7 @@ const Index = () => {
       className='scrollview'
       scrollY
       id={scrollViewId}
+      
       scrollWithAnimation
       scrollTop={scrollTop}
       style={scrollStyle}
