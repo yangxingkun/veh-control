@@ -10,7 +10,14 @@ import { questionBychat } from '@/api/chat'
 import classNames from 'classnames';
 
 import './index.scss';
-const messagesInit: any = [
+
+
+interface IProps {
+  id?: string,
+  role: string,
+  content: string
+}
+const messagesInit: IProps[]= [
   // { "role": "assistant", "content": "You are a helpful assistant." },
   // { "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?" },
   // { "role": "assistant", "content": "You are a helpful assistant." },
@@ -87,16 +94,16 @@ const Index = () => {
       let keyHeightPx: any = e.detail.height + 'px';
       // state.listScrollTop < windowHeight ? windowHeight - state.listScrollTop > 94 + keyHeight ? setState((pre) => ({ ...pre, ...{ placeBottom: `${94 + keyHeight}px` } })) : null
       // state.listScrollTop+keyHeight+94
-      let str= windowHeight - keyHeight -94
-      console.log(str,"获取scrollHeight高度123456")
-      setState((pre) => ({ ...pre, ...{ placeBottom: `${keyHeight + 94}px`, inputBottom: keyHeightPx, scrollHeight: `${windowHeight - keyHeight -94}px` } }))
+      let str = windowHeight - keyHeight - 94
+      console.log(str, "获取scrollHeight高度123456")
+      setState((pre) => ({ ...pre, ...{ placeBottom: `${keyHeight + 94}px`, inputBottom: keyHeightPx, scrollHeight: `${windowHeight - keyHeight - 94}px` } }))
       Taro.nextTick(() => {
         methods.handleFocusScrollToEnd()
       })
     },
     handleBlur(e) {
       console.log(e, "handleBlur")
-      setState((pre) => ({ ...pre, ...{placeBottom: `${94}px`, inputBottom: 0, scrollHeight: `${100}vh` } }))
+      setState((pre) => ({ ...pre, ...{ placeBottom: `${94}px`, inputBottom: 0, scrollHeight: `${100}vh` } }))
       // Taro.nextTick(() => {
       //   scrollBottom()
       // })
@@ -107,16 +114,14 @@ const Index = () => {
   }
 
   // useEffect(() => {
-   
+
   // }, [state.scrollHeight])
-  
+
   const scrollBottom = () => {
     var query = Taro.createSelectorQuery().select('#chat-list').boundingClientRect()
     query.exec(function (res) {
-
-      console.log(res[0].height,state.scrollHeight,windowHeight,"元素高，滚动高,页面高")
-      
-      setState((pre) => ({ ...pre, ...{ listScrollTop: res[0].height} }))
+      console.log(res[0].height, state.scrollHeight, windowHeight, "元素高，滚动高,页面高")
+      setState((pre) => ({ ...pre, ...{ listScrollTop: res[0].height } }))
     });
   }
 
