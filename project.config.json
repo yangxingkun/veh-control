@@ -2,10 +2,9 @@
   "miniprogramRoot": "./dist",
   "projectname": "car-control",
   "description": "",
-
-  "appid": "wxb1139e16d3c17113",
+  "appid": "wxcc86d954b98c82b9",
   "setting": {
-    "urlCheck": true,
+    "urlCheck": false,
     "es6": false,
     "enhance": false,
     "compileHotReLoad": false,

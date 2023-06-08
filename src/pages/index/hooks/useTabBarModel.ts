@@ -8,7 +8,7 @@ interface IState {
   }
 }
 const TITLES = [
-  '首页',
+  '发现',
   '咪控',
   '我的',
 ]
@@ -16,13 +16,14 @@ export function useTabBarModel() {
   const router = useRouter();
   const model = useModel<IState>({
     state: {
-      activeIndex: router.params.activeMy ? 2 : 1,
+      activeIndex: router.params.activeMy ? 2 : 0,
       tabRenderedMap: {}
     },
     computed: [
       {
         keys: ['activeIndex'],
         hander: ({ activeIndex, tabRenderedMap }) => {
+          // console.log({ ...tabRenderedMap, [activeIndex]: true },"{ ...tabRenderedMap, [activeIndex]: true }")
           return {
             tabRenderedMap: { ...tabRenderedMap, [activeIndex]: true },
           }
@@ -33,6 +34,7 @@ export function useTabBarModel() {
       {
         keys: ['activeIndex'],
         hander: ({ activeIndex }) => {
+          // console.log(activeIndex,"[][watch][[5]")
           Taro.setNavigationBarTitle({
             title: TITLES[activeIndex],
           })

@@ -9,6 +9,7 @@ interface IProps {
   text?: string;
 }
 const BottomDivider = ({ loading, hasMore = true, text, dataLength = 0 }: IProps) => {
+  console.log(dataLength,"[][]====]")
   return (
     <div className="bottom-divider">
       {loading && (
