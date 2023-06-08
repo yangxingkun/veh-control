@@ -9,10 +9,6 @@ import Redirect from '@/components/Redirect';
 import { verifyChatCode } from '@/api/chat'
 import { getUserInfo } from '@/utils/user';
 import './index.scss';
-
-
-
-
 const CustomDialog = ({ isShow, setIsShow }) => {
   return (
     <Dialog
@@ -33,12 +29,6 @@ const CustomDialog = ({ isShow, setIsShow }) => {
     </Dialog>
   )
 }
-
-
-
-
-
-
 const List = ({ visible, myModel }) => {
  
   const { isLogin, loginChecking } = myModel.useGetState();

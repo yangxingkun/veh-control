@@ -16,7 +16,7 @@ export function useTabBarModel() {
   const router = useRouter();
   const model = useModel<IState>({
     state: {
-      activeIndex: router.params.activeMy ? 2 : 1,
+      activeIndex: router.params.activeMy ? 2 : 0,
       tabRenderedMap: {}
     },
     computed: [

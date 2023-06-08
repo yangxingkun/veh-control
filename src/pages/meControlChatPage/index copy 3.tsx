@@ -48,7 +48,7 @@ const Index = () => {
     animated: false,
     scrollHeight: "100vh",
     inputBottom: 0,
-    placeBottom: '94px',
+    placeBottom: '',
     listScrollTop: 14999,
   })
   const windowHeight = Taro.getSystemInfoSync().windowHeight;
@@ -64,6 +64,9 @@ const Index = () => {
         .node()
         .exec((res) => {
           const scrollView = res[0].node
+          // scrollView.scrollTo({
+          //   top:100
+          // })
           scrollView.scrollIntoView('#chat_panel_last_view_id')
         })
     },
@@ -91,17 +94,14 @@ const Index = () => {
       console.log(str,"获取scrollHeight高度123456")
       setState((pre) => ({ ...pre, ...{ placeBottom: `${keyHeight + 94}px`, inputBottom: keyHeightPx, scrollHeight: `${windowHeight - keyHeight -94}px` } }))
       Taro.nextTick(() => {
-        methods.handleFocusScrollToEnd()
+        scrollBottom()
       })
     },
     handleBlur(e) {
       console.log(e, "handleBlur")
       setState((pre) => ({ ...pre, ...{placeBottom: `${94}px`, inputBottom: 0, scrollHeight: `${100}vh` } }))
-      // Taro.nextTick(() => {
-      //   scrollBottom()
-      // })
       Taro.nextTick(() => {
-        methods.handleFocusScrollToEnd()
+        scrollBottom()
       })
     }
   }
@@ -124,8 +124,8 @@ const Index = () => {
     if (!/^\s*$/.test(value)) {
       setMessages((prev) => ([...prev, ...[{ "role": "user", "content": value }, { "role": "assistant", "content": '...' }]]))
       setValue('')
-      methods.handleFocusScrollToEnd()
-      // scrollBottom()
+      // methods.handleFocusScrollToEnd()
+      scrollBottom()
       setIsLoading(true)
       let { message } = await questionBychat({ question: value })
       if (message) {
@@ -134,8 +134,8 @@ const Index = () => {
           return [...prev]
         })
         Taro.nextTick(() => {
-          methods.handleFocusScrollToEnd()
-          // scrollBottom()
+          // methods.handleFocusScrollToEnd()
+          scrollBottom()
         })
         setIsLoading(false)
       }
@@ -153,7 +153,7 @@ const Index = () => {
     console.log(e, '自定义下拉刷新被触发')
     setTimeout(() => {
       setRefreshTrigger(false);
-    }, 3000)
+    }, 2000)
   };
 
   const handleScrollToUpper = (e) => {
@@ -165,7 +165,7 @@ const Index = () => {
       Taro.nextTick(() => {
         // methods.handleFocusScrollToEnd()
       })
-    }, 3000);
+    }, 2000);
     return () => {
       clearTimeout(timerRef.current);
     }
@@ -184,9 +184,9 @@ const Index = () => {
           // refresherTriggered={refreshTrigger}
           // onRefresherRefresh={onRefresh}
           // onScrollToUpper={handleScrollToUpper}
-          // scrollTop={state.listScrollTop}
+          scrollTop={state.listScrollTop}
           id="chat_panel_div_class_find_id"
-          style={{ height: '100%' }} className="chat">
+          style={{ height: state.scrollHeight }} className="chat">
           <div id='chat-list'>
             {messages.map((item, index) => {
               return (
@@ -211,7 +211,7 @@ const Index = () => {
               );
             })}
           </div>
-          <div style={{ height: state.placeBottom }} id="chat_panel_last_view_id"></div>
+          <div style={{ height: '94px', background: 'red' }} id="chat_panel_last_view_id"></div>
         </ScrollView>
         <View className="chatbox" style={{ bottom: state.inputBottom }} onTouchStart={(e) => {
           e.preventDefault()
