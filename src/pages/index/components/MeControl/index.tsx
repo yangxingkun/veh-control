@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Taro from '@tarojs/taro';
-import { View, Text, Input, Button } from '@tarojs/components';
+import { View, Text,Button, Input} from '@tarojs/components';
 import AddFriend from '@/components/AddFriend';
 import { Dialog, Radio, Icon } from '@nutui/nutui-react-taro';
 import classNames from 'classnames';
@@ -16,21 +16,18 @@ const CustomDialog = ({ isShow, setIsShow }) => {
       title="内测码错误"
       textAlign="center"
       noCancelBtn={true}
+      noOkBtn={true}
       visible={isShow.show}
-      onOk={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}
-      // onCancel={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}
-      okText="我知道了"
-    // footerDirection="vertical"
     >
-      <div>
-        <div>请重新输入联系我们</div>
-        <div>获取内测码</div>
+      <div className='dialog-flex'>
+        <div style={{marginTop:'11px'}}>请重新输入联系我们</div>
+        <div style={{marginBottom:'26px'}}>获取内测码</div>
+        <Button onClick={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}>我知道了</Button>
       </div>
     </Dialog>
   )
 }
 const List = ({ visible, myModel }) => {
- 
   const { isLogin, loginChecking } = myModel.useGetState();
   const token = getToken();
   const userInfo: any = getUserInfo()
