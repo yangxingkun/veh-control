@@ -20,15 +20,12 @@ const Index = ({ showPrompt, setShowObj }: IProps) => {
             title={<div className='propmtTit'>提问示例</div>}
             visible={showPrompt}
             footerDirection='vertical'
-            mask={true}
+            mask={false}
             noOkBtn={true}
             noCancelBtn={true}
-            onCancel={() => setShowObj(false)}
+            onCancel={() => setShowObj((pre)=>({...pre,...{showPrompt:false}}))}
         >
-
-
             <View className='Propmtlist'>
-
                 {
                     metionPropmtList.map(item => {
                         return (<div key={item} className='propmtBox'>{item}</div>)

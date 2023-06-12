@@ -108,6 +108,9 @@ const Index = () => {
     },
     handleFocusHeight(e) {
       console.log(e.detail.height, "handleFocusHeight")
+      
+      setShowObj((pre)=>({...pre,...{showPrompt:false}}))
+
       let keyHeight: any = e.detail.height;
       let keyHeightPx: any = e.detail.height + 'px';
       // state.listScrollTop < windowHeight ? windowHeight - state.listScrollTop > 94 + keyHeight ? setState((pre) => ({ ...pre, ...{ placeBottom: `${94 + keyHeight}px` } })) : null
@@ -280,17 +283,13 @@ const Index = () => {
                   {
                     item.role == 'user' && <View className="user" >
                       {/* <img className="user-avatar" src="http://152.136.205.136:9000/vehicle-control/font/Shape.svg"></img> */}
-                      <Text className="content" onClick={() => {
-                        // methods.handleSetClipboardData(item)
-                      }}>{item.content}</Text>
+                      <Text className="content" >{item.content}</Text>
                     </View>
                   }
                   {
                     item.role == 'assistant' && <View className="assistant" >
                       <img className="avatar" src="http://152.136.205.136:9000/vehicle-control/font/Shape.svg"></img>
-                      <View className="content" onClick={() => {
-                        // methods.handleSetClipboardData(item)
-                      }}>
+                      <View className="content" >
                         {item.content}
                         <View className='footer' onClick={(e) => {
                           switchImg(e, index, item)
