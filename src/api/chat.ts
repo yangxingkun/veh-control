@@ -19,3 +19,14 @@ export function questionBychat({ question }) {
       }
     })
   }
+export function updateBychat(id,status) {
+    return request({
+      method: 'POST',
+      url: `/gpt/message/update/${id}`,
+      data: {
+        status,
+      }
+    })
+  }
+
+  

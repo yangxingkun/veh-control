@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import Taro from '@tarojs/taro';
-import { View, Text,Button, Input} from '@tarojs/components';
+import Taro, { useLoad } from '@tarojs/taro';
+import { View, Text, Button, Input } from '@tarojs/components';
 import AddFriend from '@/components/AddFriend';
 import { Dialog, Radio, Icon } from '@nutui/nutui-react-taro';
 import classNames from 'classnames';
@@ -8,6 +8,7 @@ import { getToken } from '@/utils/token';
 import Redirect from '@/components/Redirect';
 import { verifyChatCode } from '@/api/chat'
 import { getUserInfo } from '@/utils/user';
+import { setVerify, getVerify } from '@/utils/chatVerify';
 import './index.scss';
 const CustomDialog = ({ isShow, setIsShow }) => {
   return (
@@ -20,8 +21,8 @@ const CustomDialog = ({ isShow, setIsShow }) => {
       visible={isShow.show}
     >
       <div className='dialog-flex'>
-        <div style={{marginTop:'11px'}}>请重新输入联系我们</div>
-        <div style={{marginBottom:'26px'}}>获取内测码</div>
+        <div style={{ marginTop: '11px' }}>请重新输入联系我们</div>
+        <div style={{ marginBottom: '26px' }}>获取内测码</div>
         <Button onClick={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}>我知道了</Button>
       </div>
     </Dialog>
@@ -30,17 +31,27 @@ const CustomDialog = ({ isShow, setIsShow }) => {
 const List = ({ visible, myModel }) => {
   const { isLogin, loginChecking } = myModel.useGetState();
   const token = getToken();
+  const verify = getVerify();
   const userInfo: any = getUserInfo()
   const [isShow, setIsShow] = useState({
     show: false,
     message: ''
   });
   const [value, setValue] = useState('8M6fzH');
+  // 
+  useEffect(() => {
+    if (visible) {
+      verify && Taro.redirectTo({
+        url: `/pages/meControlChatPage/index?code=${verify}`,
+      });
+    }
+  }, [visible]);
   const handleModal = async () => {
     let { verified, message } = await verifyChatCode({ code: value, user: userInfo.userCode })
     switch (verified) {
       case true:
-        Taro.navigateTo({
+        setVerify(verified)
+        Taro.redirectTo({
           url: `/pages/meControlChatPage/index?code=${'1'}`,
         });
         break;
@@ -86,7 +97,6 @@ const List = ({ visible, myModel }) => {
           确定
         </Button>
         <View className="mark">
-          {/* <Text className="mark-text"></Text> */}
           <AddFriend
             text="暂无内测码 请联系我们"
             showDivider={false}

@@ -10,14 +10,14 @@ import handaIconSvg from '@/assets/svg/handa_icon.svg';
 import verhandIconSvg from '@/assets/svg/verhand_icon.svg';
 import verhandaIconSvg from '@/assets/svg/verhanda_icon.svg';
 
-import { questionBychat } from '@/api/chat'
+import { questionBychat, updateBychat } from '@/api/chat'
 import classNames from 'classnames';
 
 import './index.scss';
 
 
 interface IProps {
-  rowId?: number,
+  rowId?: number | string,
   id?: string,
   role: string,
   content: string,
@@ -25,10 +25,9 @@ interface IProps {
   isverhand?: boolean
 }
 const messagesInit: IProps[] = [
-  { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant.", ishand: false, isverhand: false },
-  { "rowId": 1, "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?", ishand: false, isverhand: false },
-  { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant7897897897897897897987.", ishand: false, isverhand: false },
-
+  // { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant.", ishand: false, isverhand: false },
+  // { "rowId": 1, "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?", ishand: false, isverhand: false },
+  // { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant7897897897897897897987.", ishand: false, isverhand: false },
 ]
 const Index = () => {
   const [showObj, setShowObj] = useState({
@@ -36,11 +35,6 @@ const Index = () => {
     showPrompt: false
   })
   const [messages, setMessages] = useState(messagesInit)
-  const [handObj, setHandObj] = useState({
-    ishand: false,
-    isverhand: false
-  })
-
   const [state, setState] = useState({
     list: [],
     newMessageList: [],
@@ -167,10 +161,10 @@ const Index = () => {
         })
       })
       setIsLoading(true)
-      let { message } = await questionBychat({ question: value })
+      let { message, msg_id } = await questionBychat({ question: value })
       if (message) {
         setMessages((prev) => {
-          prev[prev.length - 1] = { "role": "assistant", "content": message, ishand: false, isverhand: false }
+          prev[prev.length - 1] = { rowId: msg_id, "role": "assistant", "content": message, ishand: false, isverhand: false }
           return [...prev]
         })
         Taro.nextTick(() => {
@@ -199,20 +193,34 @@ const Index = () => {
     console.log(e, '滚动到🆙部上拉加载')
   }
   const switchImg = (e, index, item) => {
-    console.log(item, index, '9090909')
+    if(!item.rowId) return;
     let id = e.target.dataset?.id;
     if (id == 1) {
       setMessages((pre) => {
         pre[index] = { ...item, ...{ ishand: !item.ishand, isverhand: false } }
+        console.log(pre[index], " pre[index]1")
         return [...pre]
       }
       )
     } else if (id == 2) {
       setMessages((pre) => {
         pre[index] = { ...item, ...{ ishand: false, isverhand: !item.isverhand } }
+        console.log(pre[index], " pre[index]2")
         return [...pre]
       })
     }
+    Taro.nextTick(() => {
+      let status = messages[index].ishand ? 1 : messages[index].isverhand ? 2 : 0
+      console.log(status)
+      updateBychat(item.rowId, status).then(({successed}) => {
+        if(!successed){
+          Taro.showToast({
+            title: '失败',
+            icon: 'none'
+          })
+        }
+      })
+    })
   }
   useEffect(() => {
     timerRef.current = setTimeout(() => {
@@ -258,8 +266,6 @@ const Index = () => {
                         <View className='footer' onClick={(e) => {
                           switchImg(e, index, item)
                         }}>
-                          {item.ishand}
-                          {item.isverhand}
                           <img data-id="1" className={classNames('footer-img')} src={item.ishand ? handaIconSvg : handIconSvg} style={{ marginRight: '24px' }} />
                           <img data-id="2" className={classNames('footer-img')} src={item.isverhand ? verhandaIconSvg : verhandIconSvg} />
                         </View>
@@ -270,7 +276,7 @@ const Index = () => {
               );
             })}
           </div>
-          <div style={{ height: state.placeBottom, background: 'red' }} id="chat_panel_last_view_id"></div>
+          <div style={{ height: state.placeBottom, }} id="chat_panel_last_view_id"></div>
         </ScrollView>
         <View className="chatbox" style={{ bottom: state.inputBottom, paddingBottom: state.pdBm, height: state.inputHeight }} onTouchStart={(e) => {
           e.preventDefault()

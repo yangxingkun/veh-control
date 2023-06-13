@@ -2,6 +2,7 @@ import Taro from '@tarojs/taro';
 import { safeJSONParse } from './JSON';
 import { getToken, removeToken } from './token';
 import { removeUserInfo } from './user';
+import { removeVerify } from './chatVerify';
 
 // const BASE_URL = 'http://152.136.205.136:8080/api';
 const BASE_URL = 'https://wx.chekkk.com/api';
@@ -27,6 +28,7 @@ const handlSuccess = (res, resolve, reject) => {
       url: '/pages/auth/index'
     })
     removeToken();
+    removeVerify();
     removeUserInfo();
     return reject(new Error('登录过期'));
   }
