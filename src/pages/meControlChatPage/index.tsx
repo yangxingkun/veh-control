@@ -27,16 +27,8 @@ interface IProps {
 const messagesInit: IProps[] = [
   { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant.", ishand: false, isverhand: false },
   { "rowId": 1, "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?", ishand: false, isverhand: false },
-  { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant.", ishand: false, isverhand: false },
-  // { "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?" },
-  // { "role": "assistant", "content": "You are a helpful assistant." },
-  // { "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?" },
-  // { "role": "assistant", "content": "You are a helpful assistant." },
-  // { "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?" },
-  // { "role": "assistant", "content": "You are a helpful assistant." },
-  // { "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?" },
-  // { "role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020." },
-  // { "role": "user", "content": "Where was it played?" }
+  { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant7897897897897897897987.", ishand: false, isverhand: false },
+
 ]
 const Index = () => {
   const [showObj, setShowObj] = useState({
@@ -76,7 +68,6 @@ const Index = () => {
     listScrollTop: 14999,
   })
   const windowHeight = Taro.getSystemInfoSync().windowHeight;
-  // let keyHeight = 0;
   const [value, setValue] = useStateWithCall('')
   const [isLoading, setIsLoading] = useState(false)
   const timerRef = useRef<any>();
@@ -102,30 +93,22 @@ const Index = () => {
       })
     },
     handleKeyboardHeightChange(e) {
-      // console.log(e.detail.height + 'px')
-      console.log(e.detail.height, "handleKeyboardHeightChange")
       setState((pre) => ({ ...pre, ...{ keyHeight: e.detail.height } }))
     },
     handleFocusHeight(e) {
       console.log(e.detail.height, "handleFocusHeight")
-      
-      setShowObj((pre)=>({...pre,...{showPrompt:false}}))
-
+      setShowObj((pre) => ({ ...pre, ...{ showPrompt: false } }))
       let keyHeight: any = e.detail.height;
       let keyHeightPx: any = e.detail.height + 'px';
-      // state.listScrollTop < windowHeight ? windowHeight - state.listScrollTop > 94 + keyHeight ? setState((pre) => ({ ...pre, ...{ placeBottom: `${94 + keyHeight}px` } })) : null
-      // state.listScrollTop+keyHeight+94
-      // let str = windowHeight - keyHeight - 58
-      // console.log(str, "获取scrollHeight高度123456")
       createSelectorQuery().select('#input-Id').boundingClientRect()
         .exec(function (res) {
           let inputHeightlast = res[0].height + 12 + 20
           let placeBottomlast = res[0].height + 12 + 20 + keyHeight
           setState((pre) => ({ ...pre, ...{ autoHeight: true, keyHeight: e.detail.height, inputHeight: `${inputHeightlast}px`, placeBottom: `${placeBottomlast}px`, pdBm: `${6}px`, inputBottom: keyHeightPx, scrollHeight: `${windowHeight - keyHeight - 58}px` } }))
+          Taro.nextTick(() => {
+            methods.handleFocusScrollToEnd()
+          })
         })
-      Taro.nextTick(() => {
-        methods.handleFocusScrollToEnd()
-      })
     },
     handleBlur(e) {
       console.log(e, "handleBlur")
@@ -135,23 +118,25 @@ const Index = () => {
           let inputHeightlast = res[0].height + 46 + 20
           let placeBottomlast = 46 + 20 + res[0].height
           setState((pre) => ({ ...pre, ...{ focus: false, autoHeight: true, keyHeight: 0, inputHeight: `${inputHeightlast}px`, placeBottom: `${placeBottomlast}px`, pdBm: `${40}px`, inputBottom: '0px', scrollHeight: `${100}vh` } }))
-          Taro.nextTick(() => {
-            methods.handleFocusScrollToEnd()
-          })
+          // Taro.nextTick(() => {
+          //   methods.handleFocusScrollToEnd()
+          // })
         });
     },
     handleInput(e) {
       setValue(e.detail.value).then(() => {
-        createSelectorQuery().select('#input-Id').boundingClientRect()
-          .exec(function (res) {
-            console.log(res[0].height, "元素高0000000000")
-            let inputHeightlast = res[0].height + 12 + 20
-            let placeBottomlast = state.keyHeight + 12 + 20 + res[0].height
-            setState((pre) => ({ ...pre, ...{ placeBottom: `${placeBottomlast}px`, inputHeight: `${inputHeightlast}px`, pdBm: `${6}px` } }))
-            Taro.nextTick(() => {
-              methods.handleFocusScrollToEnd()
-            })
-          });
+        Taro.nextTick(() => {
+          createSelectorQuery().select('#input-Id').boundingClientRect()
+            .exec(function (res) {
+              console.log(res[0].height, "元素高0000000000")
+              let inputHeightlast = res[0].height + 12 + 20
+              let placeBottomlast = state.keyHeight + 12 + 20 + res[0].height
+              setState((pre) => ({ ...pre, ...{ placeBottom: `${placeBottomlast}px`, inputHeight: `${inputHeightlast}px`, pdBm: `${6}px` } }))
+              Taro.nextTick(() => {
+                methods.handleFocusScrollToEnd()
+              })
+            });
+        })
       })
     }
   }
@@ -165,13 +150,13 @@ const Index = () => {
 
   const sendMessageService = async () => {
     if (!/^\s*$/.test(value)) {
-      setMessages((prev) => ([...prev, ...[{ "rowId": 9, "role": "user", "content": value, ishand: false, isverhand: false }, { " rowId": 10, "role": "assistant", "content": '...', ishand: false, isverhand: false }]]))
+      setMessages((prev) => ([...prev, ...[{ "role": "user", "content": value, ishand: false, isverhand: false }, { "role": "assistant", "content": '...', ishand: false, isverhand: false }]]))
       setValue('').then(() => {
-        Taro.nextTick(()=>{
+        Taro.nextTick(() => {
           createSelectorQuery().select('#input-Id').boundingClientRect()
             .exec(function (res) {
               console.log(res[0].height, state.keyHeight, "元素高sendMessageService")
-              let inputHeightlast = state.keyHeight == 0 ? 46 + 20+res[0].height  : res[0].height + 12 + 20
+              let inputHeightlast = state.keyHeight == 0 ? 46 + 20 + res[0].height : res[0].height + 12 + 20
               let placeBottomlast = state.keyHeight == 0 ? 46 + 20 + res[0].height : res[0].height + 12 + 20 + state.keyHeight
               let pdBmlast = state.keyHeight == 0 ? 40 : 6
               setState((pre) => ({ ...pre, ...{ focus: true, autoHeight: true, inputBottom: `${state.keyHeight}px`, inputHeight: `${inputHeightlast}px`, placeBottom: `${placeBottomlast}px`, pdBm: `${pdBmlast}px`, scrollHeight: `${100}vh` } }))
@@ -181,20 +166,15 @@ const Index = () => {
             });
         })
       })
-      // setState((pre) => ({ ...pre, ...{ autoHeight: true, placeBottom: `${pre.keyHeight + 32+20}px`, pdBm: `${40}px`, inputHeight: `${32+20}px`, } }))
-      // Taro.nextTick(() => {
-      //   methods.handleFocusScrollToEnd()
-      // })
       setIsLoading(true)
       let { message } = await questionBychat({ question: value })
       if (message) {
         setMessages((prev) => {
-          prev[prev.length - 1] = { "role": "assistant", "content": message }
+          prev[prev.length - 1] = { "role": "assistant", "content": message, ishand: false, isverhand: false }
           return [...prev]
         })
         Taro.nextTick(() => {
           methods.handleFocusScrollToEnd()
-          // scrollBottom()
         })
         setIsLoading(false)
       }
@@ -222,33 +202,17 @@ const Index = () => {
     console.log(item, index, '9090909')
     let id = e.target.dataset?.id;
     if (id == 1) {
-      // setHandObj((pre) => ({
-      //   ...pre, ...{
-      //     ishand: !pre.ishand,
-      //     isverhand: false
-      //   }
-      // }))
       setMessages((pre) => {
-        return pre.splice(index, 1, { ...item, ...{ ishand: !item.ishand, isverhand: false } })
+        pre[index] = { ...item, ...{ ishand: !item.ishand, isverhand: false } }
+        return [...pre]
       }
       )
-      Taro.nextTick(() => {
-        console.log(messages)
-      })
     } else if (id == 2) {
-      // setHandObj((pre) => ({
-      //   ...pre, ...{
-      //     ishand: false,
-      //     isverhand: !pre.isverhand
-      //   }
-      // }))
       setMessages((pre) => {
-        return pre.splice(index, 1, { ...item, ...{ ishand: false, isverhand: !item.isverhand } })
+        pre[index] = { ...item, ...{ ishand: false, isverhand: !item.isverhand } }
+        return [...pre]
       })
     }
-
-
-
   }
   useEffect(() => {
     timerRef.current = setTimeout(() => {
@@ -288,16 +252,16 @@ const Index = () => {
                   }
                   {
                     item.role == 'assistant' && <View className="assistant" >
-                      <img className="avatar" src="http://152.136.205.136:9000/vehicle-control/font/Shape.svg"></img>
+                      <img className="avatar" src="http://152.136.205.136:9000/vehicle-control/font/Avatar%20ChatGPT.svg"></img>
                       <View className="content" >
                         {item.content}
                         <View className='footer' onClick={(e) => {
                           switchImg(e, index, item)
                         }}>
+                          {item.ishand}
+                          {item.isverhand}
                           <img data-id="1" className={classNames('footer-img')} src={item.ishand ? handaIconSvg : handIconSvg} style={{ marginRight: '24px' }} />
                           <img data-id="2" className={classNames('footer-img')} src={item.isverhand ? verhandaIconSvg : verhandIconSvg} />
-                          {/* <text className={classNames('iconfont-handa_icon')} style={{ marginRight: '24px' }}></text>
-                          <text className={classNames('iconfont-verhanda_icon')} ></text> */}
                         </View>
                       </View>
                     </View>
@@ -332,7 +296,7 @@ const Index = () => {
               onKeyboardHeightChange={(e) => {
                 methods.handleKeyboardHeightChange(e)
               }}
-              maxlength={165} />
+              maxlength={150} />
             {
               isLoading ? <Icon name="loading" className="send" ></Icon> : <img className="send" src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onTouchStart={(e) => {
                 e.preventDefault()
