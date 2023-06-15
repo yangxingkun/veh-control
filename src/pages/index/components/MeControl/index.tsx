@@ -40,8 +40,8 @@ const List = ({ visible, myModel }) => {
   const [value, setValue] = useState('8M6fzH');
   // 
   useEffect(() => {
-    if (visible) {
-      verify && Taro.redirectTo({
+    if (visible&&verify) {
+      Taro.redirectTo({
         url: `/pages/meControlChatPage/index?code=${verify}`,
       });
     }

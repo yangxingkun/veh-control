@@ -75,6 +75,9 @@
     border-radius: 10px;
     white-space: pre-wrap;
     word-break: break-all;
+    user-select: text ;
+    -webkit-user-select: text ;
+
   }
 
   .user .content {
@@ -91,11 +94,13 @@
       justify-content: flex-end;
       align-items: center;
       height: 24px;
+
       // border: 1px solid #3388FF;3
       .iconfont-hand_icon {
         background-color: transparent;
       }
-      &-img{
+
+      &-img {
         display: block;
         width: 17px;
         height: 14px;

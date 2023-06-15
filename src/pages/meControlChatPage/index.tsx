@@ -65,7 +65,6 @@ const Index = () => {
   const [value, setValue] = useStateWithCall('')
   const [isLoading, setIsLoading] = useState(false)
   const timerRef = useRef<any>();
-  const [refreshTrigger, setRefreshTrigger] = useState(false);
   const methods = {
     handleFocusScrollToEnd() {
       Taro.createSelectorQuery()
@@ -134,13 +133,9 @@ const Index = () => {
       })
     }
   }
-  const scrollBottom = () => {
-    var query = Taro.createSelectorQuery().select('#chat-list').boundingClientRect()
-    query.exec(function (res) {
-      console.log(res[0].height, state.scrollHeight, windowHeight, "元素高，滚动高,页面高")
-      setState((pre) => ({ ...pre, ...{ listScrollTop: res[0].height } }))
-    });
-  }
+
+  
+
 
   const sendMessageService = async () => {
     if (!/^\s*$/.test(value)) {
@@ -180,21 +175,10 @@ const Index = () => {
       });
     }
   }
-
-  const onRefresh = (e) => {
-    setRefreshTrigger(true); // 在下拉刷新被触发时重新设置下拉刷新状态
-    console.log(e, '自定义下拉刷新被触发')
-    setTimeout(() => {
-      setRefreshTrigger(false);
-    }, 3000)
-  };
-
-  const handleScrollToUpper = (e) => {
-    console.log(e, '滚动到🆙部上拉加载')
-  }
   const switchImg = (e, index, item) => {
     if(!item.rowId) return;
     let id = e.target.dataset?.id;
+    // let itemObj=
     if (id == 1) {
       setMessages((pre) => {
         pre[index] = { ...item, ...{ ishand: !item.ishand, isverhand: false } }
@@ -238,13 +222,6 @@ const Index = () => {
           enhanced={true}
           scrollIntoView={"chat_panel_last_view_id"}
           scrollY
-          // upperThreshold={200}
-          // lowerThreshold={200}
-          // refresherEnabled={false}
-          // refresherTriggered={refreshTrigger}
-          // onRefresherRefresh={onRefresh}
-          // onScrollToUpper={handleScrollToUpper}
-          // scrollTop={state.listScrollTop}
           id="chat_panel_div_class_find_id"
           style={{ height: '100%' }} className="chat">
           <div id='chat-list'>
@@ -254,7 +231,6 @@ const Index = () => {
                 <View key={index} style={{ margin: '40px 0' }}>
                   {
                     item.role == 'user' && <View className="user" >
-                      {/* <img className="user-avatar" src="http://152.136.205.136:9000/vehicle-control/font/Shape.svg"></img> */}
                       <Text className="content" >{item.content}</Text>
                     </View>
                   }
@@ -262,7 +238,8 @@ const Index = () => {
                     item.role == 'assistant' && <View className="assistant" >
                       <img className="avatar" src="http://152.136.205.136:9000/vehicle-control/font/Avatar%20ChatGPT.svg"></img>
                       <View className="content" >
-                        {item.content}
+                       
+                        <Text userSelect={true} decode> {item.content}</Text>
                         <View className='footer' onClick={(e) => {
                           switchImg(e, index, item)
                         }}>

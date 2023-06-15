@@ -57,7 +57,6 @@ const Index = () => {
   useEffect(() => {
 
     Taro.nextTick(()=>{
-
       createSelectorQuery().select(`#${scrollViewId}`).boundingClientRect().exec(res => {
         console.log(res)
       })
@@ -69,6 +68,8 @@ const Index = () => {
   // onScrollToUpper = () => {}
 
   const onScroll = (e) => {
+
+    console.log(e,'onScroll')
     // console.log(e.detail)
   }
   const scrollStyle = {

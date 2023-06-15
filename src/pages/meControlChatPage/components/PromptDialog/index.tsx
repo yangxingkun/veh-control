@@ -4,7 +4,7 @@ import "./index.scss"
 import { View } from '@tarojs/components';
 const metionPropmtList = [
     '“我的预算范围是20-30万，日常自己开,有推荐的电动车吗？”',
-    '“30万，买比亚迪海豹还是特斯拉Model3?“',
+    '“30万，买比亚迪海豹还是特斯拉Model3? “',
     '“帮我设计一款30万、适合家庭的轿车吧。”',
 ]
 
