@@ -22,7 +22,7 @@
     // width: 86%;
     padding: 0;
     // margin: 0 auto;
-    margin-right:18px ;
+    margin-right: 18px;
     margin-left: 18px;
     background-color: #f0f3f7;
     margin-bottom: 22px;
@@ -36,7 +36,7 @@
 
   .wrapper-button {
     // width: 90%;
-    margin-right:18px ;
+    margin-right: 18px;
     margin-left: 18px;
     border-radius: 100px;
     height: 50px;
@@ -49,6 +49,11 @@
     font-size: 18px;
     letter-spacing: 4px;
     transition: all ease 0.3;
+  }
+
+
+  .wrapper-button-active {
+    background-color: #1890ff;
   }
 
   .logo {
@@ -81,29 +86,34 @@
     font-weight: 400;
   }
 
-  .mark {
-    font-size: 12px;
-    color: #888;
+
+  .contact{
+    position: relative;
     margin: 0 auto;
     display: flex;
     justify-content: center;
-
-    &-text {
-      margin-right: 2px;
+    font-size: 12px;
+    font-weight: 500;
+    &-button{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
     }
-  }
+    &-text{
+      margin-right: 5px;
+      color: #888;
+    }
+    &-customer_service{color: #3388FF;}
 
-  .mark-customer-service {
-    color: #1890ff;
   }
-
   .flex {
     display: flex;
     justify-content: center;
     margin: 0 auto;
   }
-
-
   .custom-dialog {
     .nut-dialog {
       padding: 0;
@@ -132,8 +142,9 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-    
+
     }
+
     button {
       width: 100%;
       border: none;
@@ -143,11 +154,12 @@
       font-weight: 600;
       color: #3388FF;
       border-radius: 0;
-      background-color:#fff
+      background-color: #fff
     }
+
     .nut-dialog__content {
       margin-bottom: 0;
-     
+
     }
   }
 }

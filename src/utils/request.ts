@@ -61,7 +61,6 @@ export function request<TData extends any = any>(options: Taro.request.Option): 
     const requestOptions = {...options}
     requestOptions.url = BASE_URL + options.url;
     const token = getToken();
-    console.log(token,"[][token][dialog")
     const header: Record<string, any> = {
       ...(options.header || {}),
     }

@@ -37,8 +37,8 @@ const List = ({ visible, myModel }) => {
     show: false,
     message: ''
   });
-  const [value, setValue] = useState('8M6fzH');
-  // 
+  const [value, setValue] = useState('');
+  // 8M6fzH
   useEffect(() => {
     if (visible&&verify) {
       Taro.redirectTo({
@@ -93,19 +93,23 @@ const List = ({ visible, myModel }) => {
           placeholder="请输入内测码"
           placeholderStyle="color:#95969F;font-size:12px"
         />
-        <Button type="primary" className="wrapper-button" onClick={handleModal}>
-          确定
+        <Button type="primary" className="wrapper-button" onClick={handleModal} hoverClass="wrapper-button-active">
+          确 定
         </Button>
-        <View className="mark">
-          <AddFriend
-            text="暂无内测码 请联系我们"
-            showDivider={false}
-            className="mark-customer-service"
-            icon={<Icon name="triangle-up" />}
-          />
+        <View className={classNames('contact')}>
+          <View className={classNames('contact-button')}>
+            <cell
+              styleType={1}
+              onStartmessage="startmessage"
+              onCompletemessage="completemessage"
+              plugid="689e7fc09d86da7200d62262f489b09b"
+            ></cell>
+          </View>
+          <Text className='contact-text'>暂无内测码?</Text>
+          <Text className='contact-customer_service'>联系我们</Text>
         </View>
       </div>
-      <CustomDialog isShow={isShow} setIsShow={setIsShow} ></CustomDialog>
+      <CustomDialog isShow={isShow} setIsShow={setIsShow} ></CustomDialog>3
     </View>
   );
 };
