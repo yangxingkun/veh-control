@@ -38,13 +38,13 @@ const List = ({ visible, myModel }) => {
   });
   const [value, setValue] = useState('');
   // 8M6fzH
-  // useEffect(() => {
-  //   if (visible&&verify) {
-  //     Taro.redirectTo({
-  //       url: `/pages/meControlChatPage/index?code=${verify}`,
-  //     });
-  //   }
-  // }, [visible]);
+  useEffect(() => {
+    if (visible&&verify) {
+      Taro.redirectTo({
+        url: `/pages/meControlChatPage/index?code=${verify}`,
+      });
+    }
+  }, [visible]);
   const handleModal = async () => {
     let { verified, message } = await verifyChatCode({ code: value, user: userInfo.userCode })
     switch (verified) {
