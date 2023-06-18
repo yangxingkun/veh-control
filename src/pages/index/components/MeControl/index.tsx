@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Taro, { useLoad } from '@tarojs/taro';
 import { View, Text, Button, Input } from '@tarojs/components';
-import AddFriend from '@/components/AddFriend';
 import { Dialog, Radio, Icon } from '@nutui/nutui-react-taro';
 import classNames from 'classnames';
 import { getToken } from '@/utils/token';
@@ -39,13 +38,13 @@ const List = ({ visible, myModel }) => {
   });
   const [value, setValue] = useState('');
   // 8M6fzH
-  useEffect(() => {
-    if (visible&&verify) {
-      Taro.redirectTo({
-        url: `/pages/meControlChatPage/index?code=${verify}`,
-      });
-    }
-  }, [visible]);
+  // useEffect(() => {
+  //   if (visible&&verify) {
+  //     Taro.redirectTo({
+  //       url: `/pages/meControlChatPage/index?code=${verify}`,
+  //     });
+  //   }
+  // }, [visible]);
   const handleModal = async () => {
     let { verified, message } = await verifyChatCode({ code: value, user: userInfo.userCode })
     switch (verified) {
@@ -109,7 +108,7 @@ const List = ({ visible, myModel }) => {
           <Text className='contact-customer_service'>联系我们</Text>
         </View>
       </div>
-      <CustomDialog isShow={isShow} setIsShow={setIsShow} ></CustomDialog>3
+      <CustomDialog isShow={isShow} setIsShow={setIsShow} ></CustomDialog>
     </View>
   );
 };
