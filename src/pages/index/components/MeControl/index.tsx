@@ -36,8 +36,8 @@ const List = ({ visible, myModel }) => {
     show: false,
     message: ''
   });
-  const [value, setValue] = useState('');
-  // 8M6fzH
+  const [value, setValue] = useState('8M6fzH');
+  // 
   useEffect(() => {
     if (visible&&verify) {
       Taro.redirectTo({

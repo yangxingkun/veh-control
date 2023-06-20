@@ -241,6 +241,7 @@ export function useModel<
   TEffects extends IEffects = IEffects,
   UserData extends Record<string, any> = Record<string, any>
 >(modelConfig: IModelConfig<TState, TEffects, UserData>) {
+  
   const model = useCreation(() => {
     return new Model<TState, TEffects, UserData>(modelConfig);
   });

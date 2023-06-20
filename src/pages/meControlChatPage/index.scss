@@ -35,6 +35,15 @@
     // justify-content: space-evenly;
     justify-content: flex-start;
     flex-direction: row-reverse;
+
+  }
+
+  .k_html {
+    .hightColor {
+      padding: 3px;
+      // color: #3388FF;
+      color: #f00;
+    }
   }
 
   .assistant {
@@ -61,7 +70,7 @@
 
 
   .content {
-   
+
     font-size: 14px;
     background-color: #fff;
     // padding: 15px 15px;
@@ -86,6 +95,7 @@
     width: 80%;
     padding: 10px 11px 30px 11px;
     position: relative;
+
     .footer {
       display: flex;
       justify-content: flex-end;
@@ -93,10 +103,12 @@
       position: absolute;
       bottom: 12px;
       right: 12px;
+
       // border: 1px solid #3388FF;
       .iconfont-hand_icon {
         background-color: transparent;
       }
+
       &-img {
         display: block;
         width: 17px;

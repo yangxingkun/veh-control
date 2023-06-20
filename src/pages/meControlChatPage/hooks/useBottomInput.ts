@@ -101,7 +101,6 @@ export function useBottomInput() {
         .boundingClientRect((res) => {
           let { height } = res;
           console.log(height);
-          //   debugger;
           let keyHeight = e.detail.height;
           chatBoxRef.current = {
             ...chatBoxRef.current,
@@ -115,7 +114,6 @@ export function useBottomInput() {
             },
           };
           handleFocusScrollToEnd();
-          //   methods.handleScrollTop();
           setForceUpdate(key++);
         })
         .exec();
@@ -129,7 +127,6 @@ export function useBottomInput() {
           chatBoxRef.current = {
             ...chatBoxRef.current,
             ...{
-              //   keyHeight: e.detail.height,
               inputHeight: height,
               chatBottom: 0,
               chatPb: 40,
@@ -146,7 +143,6 @@ export function useBottomInput() {
       if (line > 1 && line < 9) {
         // let totalInputHeight1 = 48 * line - (line - 1) * 16;
         let totalInputHeight = e.detail.height;
-        // console.log(e.detail.height, totalInputHeight1, "卧槽");
         let chatHeightLastest =
           chatBoxRef.current.keyHeight === 0
             ? totalInputHeight + 46
@@ -168,7 +164,6 @@ export function useBottomInput() {
       }
     },
     handleSendCalcHeight() {
-      // debugger;
       let chatHeightLastest = chatBoxRef.current.keyHeight === 0 ? 94 : 60;
       let placeHeightLastest =
         chatBoxRef.current.keyHeight === 0
@@ -184,7 +179,7 @@ export function useBottomInput() {
           placeHeight: placeHeightLastest,
         },
       };
-      console.log(key,'调用次数o')
+      // console.log(key,'调用次数o')
       key>5&&handleFocusScrollToEnd();
       setForceUpdate(key++);
     },

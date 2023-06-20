@@ -1,19 +1,17 @@
-import { useState, useRef, useEffect} from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { View, ScrollView, Text, Textarea } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import PromptDialog from "./components/PromptDialog"
 import OverlayLoading from "./components/OverlayLoading"
+import ChatItemCard from "./components/ChatItemCard"
+
 import { Icon } from '@nutui/nutui-react-taro';
 // import useStateWithCall from "./hooks/useStateWithCall"
-import handIconSvg from '@/assets/svg/hand_icon.svg';
-import handaIconSvg from '@/assets/svg/handa_icon.svg';
-import verhandIconSvg from '@/assets/svg/verhand_icon.svg';
-import verhandaIconSvg from '@/assets/svg/verhanda_icon.svg';
+
 import { useBottomInput } from "./hooks/useBottomInput"
-import { questionBychat, updateBychat } from '@/api/chat'
+import { questionBychat } from '@/api/chat'
 import classNames from 'classnames';
 import { getUserInfo } from '@/utils/user';
-
 import './index.scss';
 
 
@@ -26,7 +24,7 @@ interface IProps {
   isverhand?: boolean
 }
 const messagesInit: IProps[] = [
-  // { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant.", ishand: false, isverhand: false },
+  { "rowId": 1, "role": "user", "content": "<span className='hightColor'>4564564</span>", ishand: false, isverhand: false },
   // { "rowId": 1, "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?", ishand: false, isverhand: false },
   // { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant7897897897897897897987.", ishand: false, isverhand: false },
 ]
@@ -42,15 +40,18 @@ const Index = () => {
   const userInfo: any = getUserInfo()
   const {
     chatBoxRef,
-    methods:{
+    methods: {
       handleSendCalcHeight,
       handleLineChangeHeight,
       handleBlurCalcHeight,
       handleFocusCalcHeight,
       handleKeyboardHeightChange
-    },
-    ...rest
+    }
   } = useBottomInput()
+
+  const handle = (value) => {
+    console.log(value)
+  }
   const sendMessageService = async () => {
     if (!/^\s*$/.test(value)) {
       setMessages((prev) => ([...prev, ...[{ "role": "user", "content": value, ishand: false, isverhand: false }, { "role": "assistant", "content": '...', ishand: false, isverhand: false }]]))
@@ -59,8 +60,22 @@ const Index = () => {
         handleSendCalcHeight()
       })
       setIsLoading(true)
-      let { message, msg_id } = await questionBychat({ user: userInfo.userCode, question: value })
+      let { message, msg_id, high_light } = await questionBychat({ user: userInfo.userCode, question: value })
       if (message) {
+
+        let message0 = JSON.parse(JSON.stringify(message))
+        let highLight0 = JSON.parse(JSON.stringify(high_light))
+
+        Object.keys(highLight0).forEach(key => {
+          let value = highLight0[key]
+          message0.replace(`${key}`, `<span onClick={handle(${value})} className="hightColor">${key}</span>`)
+
+        })
+
+
+        console.log(message0,"keymessage0")
+
+
         setMessages((prev) => {
           prev[prev.length - 1] = { rowId: msg_id, "role": "assistant", "content": message, ishand: false, isverhand: false }
           return [...prev]
@@ -78,35 +93,7 @@ const Index = () => {
       });
     }
   }
-  const switchImg = (e, index, item) => {
-    if (!item.rowId) return;
-    let id = e.target.dataset?.id;
-    // let itemObj=
-    if (id == 1) {
-      setMessages((pre) => {
-        pre[index] = { ...item, ...{ ishand: !item.ishand, isverhand: false } }
-        return [...pre]
-      }
-      )
-    } else if (id == 2) {
-      setMessages((pre) => {
-        pre[index] = { ...item, ...{ ishand: false, isverhand: !item.isverhand } }
-        return [...pre]
-      })
-    }
-    Taro.nextTick(() => {
-      let status = messages[index].ishand ? 1 : messages[index].isverhand ? 2 : 0
-      console.log(status)
-      updateBychat(item.rowId, status).then(({ successed }) => {
-        if (!successed) {
-          Taro.showToast({
-            title: '失败',
-            icon: 'none'
-          })
-        }
-      })
-    })
-  }
+
   useEffect(() => {
     timerRef.current = setTimeout(() => {
       setShowObj((pre) => ({ ...pre, ...{ showLoading: false, showPrompt: true } }))
@@ -130,30 +117,8 @@ const Index = () => {
           <div id='chat-list'>
             {/* <View style={{height:'9px'}}></View> */}
             {messages.map((item, index) => {
-              return (
-                <View key={index} style={{ margin: '40px 0' }}>
-                  {
-                    item.role == 'user' && <View className="user" >
-                      <Text className="content" >{item.content}</Text>
-                    </View>
-                  }
-                  {
-                    item.role == 'assistant' && <View className="assistant" >
-                      <img className="avatar" src="http://152.136.205.136:9000/vehicle-control/font/Avatar%20ChatGPT.svg"></img>
-                      <View className="content" >
-
-                        <Text userSelect={true} decode> {item.content}</Text>
-                        <View className='footer' onClick={(e) => {
-                          switchImg(e, index, item)
-                        }}>
-                          <img data-id="1" className={classNames('footer-img')} src={item.ishand ? handaIconSvg : handIconSvg} style={{ marginRight: '24px' }} />
-                          <img data-id="2" className={classNames('footer-img')} src={item.isverhand ? verhandaIconSvg : verhandIconSvg} />
-                        </View>
-                      </View>
-                    </View>
-                  }
-                </View>
-              );
+              return (<ChatItemCard item={item} index={index} messages={
+                messages} setMessages={setMessages} />)
             })}
           </div>
           <div style={{ height: `${chatBoxRef.current.placeHeight}px`, }} id="chat_panel_last_view_id"></div>
