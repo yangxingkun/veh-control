@@ -24,7 +24,7 @@ interface IProps {
   isverhand?: boolean
 }
 const messagesInit: IProps[] = [
-  { "rowId": 1, "role": "user", "content": "<span className='hightColor'>4564564</span>", ishand: false, isverhand: false },
+  // { "rowId": 1, "role": "user", "content": `<span class='hightColor' id='test-04d8328fbe064c0fae674d7246d78bb2' data-code='04d8328fbe064c0fae674d7246d78bb2'>理想ONE</span> 真牛逼啊`, ishand: false, isverhand: false },
   // { "rowId": 1, "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?", ishand: false, isverhand: false },
   // { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant7897897897897897897987.", ishand: false, isverhand: false },
 ]
@@ -48,10 +48,6 @@ const Index = () => {
       handleKeyboardHeightChange
     }
   } = useBottomInput()
-
-  const handle = (value) => {
-    console.log(value)
-  }
   const sendMessageService = async () => {
     if (!/^\s*$/.test(value)) {
       setMessages((prev) => ([...prev, ...[{ "role": "user", "content": value, ishand: false, isverhand: false }, { "role": "assistant", "content": '...', ishand: false, isverhand: false }]]))
@@ -62,22 +58,20 @@ const Index = () => {
       setIsLoading(true)
       let { message, msg_id, high_light } = await questionBychat({ user: userInfo.userCode, question: value })
       if (message) {
-
         let message0 = JSON.parse(JSON.stringify(message))
         let highLight0 = JSON.parse(JSON.stringify(high_light))
-
         Object.keys(highLight0).forEach(key => {
           let value = highLight0[key]
-          message0.replace(`${key}`, `<span onClick={handle(${value})} className="hightColor">${key}</span>`)
-
+          const regex = new RegExp(key, 'g');
+          // data-templateDesc=${message}
+          message0 = message0.replace(regex, `<Text className='hightColor' data-type=1 data-materialCode=${value}  data-templateName=${key} data-templateCode=${value}    id="tagId-${value}" >${key}</Text>`)
         })
-
-
-        console.log(message0,"keymessage0")
-
-
+        // type=1&materialCode=ff2e6ae481fa463b95e6efd9459063d8&templateCode=101a25461a1f4c3291d2c4597fc5c260&templateName=%E8%94%9A%E6%9D%A5ET5 
+        let content=`<View>${message0}</View>`
+        // let content=`${message0}`
+        console.log(message0, "keymessage0")
         setMessages((prev) => {
-          prev[prev.length - 1] = { rowId: msg_id, "role": "assistant", "content": message, ishand: false, isverhand: false }
+          prev[prev.length - 1] = { rowId: msg_id, role: "assistant", content: content, ishand: false, isverhand: false }
           return [...prev]
         })
         Taro.nextTick(() => {
@@ -115,7 +109,6 @@ const Index = () => {
           style={{ height: '100%' }}
           className="chat">
           <div id='chat-list'>
-            {/* <View style={{height:'9px'}}></View> */}
             {messages.map((item, index) => {
               return (<ChatItemCard item={item} index={index} messages={
                 messages} setMessages={setMessages} />)

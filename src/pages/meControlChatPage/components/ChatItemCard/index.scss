@@ -1,0 +1,19 @@
+.parse {
+    display: flex;
+    .k_html {
+        flex: 1;
+        white-space: pre-wrap;
+        word-break: break-all;
+        user-select: text;
+        -webkit-user-select: text;
+        .hightColor {
+            padding: 3px;
+            color: #3388FF;
+            // color: #f00;
+        }
+    }
+
+    image {
+        width: 100% !important;
+    }
+}

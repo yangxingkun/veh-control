@@ -38,13 +38,13 @@
 
   }
 
-  .k_html {
-    .hightColor {
-      padding: 3px;
-      // color: #3388FF;
-      color: #f00;
-    }
-  }
+  // .k_html {
+  //   .hightColor {
+  //     padding: 3px;
+  //     // color: #3388FF;
+  //     color: #f00;
+  //   }
+  // }
 
   .assistant {
     display: flex;
@@ -80,6 +80,12 @@
     user-select: text;
     -webkit-user-select: text;
 
+  }
+  .hightcontent{
+    white-space: pre-wrap;
+    word-break: break-all;
+    user-select: text;
+    -webkit-user-select: text;
   }
 
   .user .content {
