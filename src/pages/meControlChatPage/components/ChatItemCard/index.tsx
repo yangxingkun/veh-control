@@ -47,15 +47,7 @@ const Index = ({ index, item, messages, setMessages }) => {
       urls: [e]
     });
   }
-  // 点击图片放大
-  // const imgClick = (e) => {
-  //   console.log(e, '点击放大')
-  //   if (!e) return false;
-  //   Taro.previewImage({
-  //     current: e,
-  //     urls: [e]
-  //   });
-  // }
+  
 
   // useEffect(() => {
   //   const el = document.getElementById('test-04d8328fbe064c0fae674d7246d78bb2') as HTMLElement
@@ -80,10 +72,8 @@ const Index = ({ index, item, messages, setMessages }) => {
       <View key={index} style={{ margin: '40px 0' }}>
         {
           item.role == 'user' && <View className="user" >
-            {/* <Text className="content" >{item.content}</Text> */}
             {/* <RichText className="content" nodes={item.content}></RichText>
                          */}
-            {/* npm install mp-html  import parse from 'mini-html-parser2'; */}
             <View className="taro_html k_html content" dangerouslySetInnerHTML={{ __html: item.content }}>
             </View>
           </View>
@@ -93,8 +83,6 @@ const Index = ({ index, item, messages, setMessages }) => {
             <img className="avatar" src="http://152.136.205.136:9000/vehicle-control/font/Avatar%20ChatGPT.svg"></img>
             <View className="content" >
               {/* <Text userSelect={true} decode> {item.content}</Text> */}
-              {/* <View className="taro_html k_html content" dangerouslySetInnerHTML={{ __html: item.content }}>
-              </View> */}
               <HightLightContent imgClick={imgClick} node={item.content}> </HightLightContent>
               <View className='footer' onClick={(e) => {
                 supportClick(e, index, item)

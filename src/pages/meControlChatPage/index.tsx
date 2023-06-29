@@ -1,10 +1,10 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, ReactNode } from 'react';
 import { View, ScrollView, Text, Textarea } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import PromptDialog from "./components/PromptDialog"
 import OverlayLoading from "./components/OverlayLoading"
 import ChatItemCard from "./components/ChatItemCard"
-
+// import HighlightText from "./components/HighlightText"
 import { Icon } from '@nutui/nutui-react-taro';
 // import useStateWithCall from "./hooks/useStateWithCall"
 
@@ -12,6 +12,7 @@ import { useBottomInput } from "./hooks/useBottomInput"
 import { questionBychat } from '@/api/chat'
 import classNames from 'classnames';
 import { getUserInfo } from '@/utils/user';
+// import { highlightText } from "./utils"
 import './index.scss';
 
 
@@ -19,7 +20,7 @@ interface IProps {
   rowId?: number | string,
   id?: string,
   role: string,
-  content: string,
+  content: string | ReactNode,
   ishand?: boolean,
   isverhand?: boolean
 }
@@ -28,6 +29,7 @@ const messagesInit: IProps[] = [
   // { "rowId": 1, "role": "user", "content": "Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?Who won the world series in 2020?", ishand: false, isverhand: false },
   // { "rowId": 1, "role": "assistant", "content": "You are a helpful assistant7897897897897897897987.", ishand: false, isverhand: false },
 ]
+const regAtom = '^\\$.\\*+-?=!:|\\/()[]{}';
 const Index = () => {
   const [showObj, setShowObj] = useState({
     showLoading: true,
@@ -48,6 +50,49 @@ const Index = () => {
       handleKeyboardHeightChange
     }
   } = useBottomInput()
+
+  const handleText = (text, hightKeyWords) => {
+    let keywordRegExp, keywords = Object.keys(hightKeyWords), ignoreCase = true;
+    if (!text) {
+      return '';
+    }
+    // 把字符串类型的关键字转换成正则
+    if (keywords) {
+      if (keywords instanceof Array) {
+        if (keywords.length === 0) {
+          return text;
+        }
+        keywordRegExp = new RegExp(
+          (keywords as string[])
+            .filter(item => !!item)
+            .map(item => (regAtom.includes(item) ? '\\' + item : item))
+            .join('|'),
+          ignoreCase ? 'ig' : 'g'
+        );
+      } else if (typeof keywords === 'string') {
+        keywordRegExp = new RegExp(keywords, ignoreCase ? 'ig' : 'g');
+      }
+    }
+    if (text && keywordRegExp) {
+      const newData = text.split(keywordRegExp); //  通过关键字的位置开始截取，结果为一个数组
+      console.log(newData, "[][newData")
+      const matchWords = text.match(keywordRegExp); // 获取匹配的文本
+      console.log(matchWords, "[][matchWords")
+      const len = newData.length;
+      let str = ``
+      newData.map((item: any, index: number) => {
+        if (index !== len - 1) {
+          let value = hightKeyWords[matchWords?.[index]]
+          str += `${item}<Text className='hightColor' data-type=1 data-materialCode=${value}  data-templateCode=${value}    id="tagId-${value}" >${matchWords?.[index]}</Text>`
+        } else {
+          str += item
+        }
+      })
+      return  `<View>${str}</View>`
+    } else {
+      return text
+    }
+  }
   const sendMessageService = async () => {
     if (!/^\s*$/.test(value)) {
       setMessages((prev) => ([...prev, ...[{ "role": "user", "content": value, ishand: false, isverhand: false }, { "role": "assistant", "content": '...', ishand: false, isverhand: false }]]))
@@ -60,16 +105,26 @@ const Index = () => {
       if (message) {
         let message0 = JSON.parse(JSON.stringify(message))
         let highLight0 = JSON.parse(JSON.stringify(high_light))
-        Object.keys(highLight0).forEach(key => {
-          let value = highLight0[key]
-          const regex = new RegExp(key, 'g');
-          // data-templateDesc=${message}
-          message0 = message0.replace(regex, `<Text className='hightColor' data-type=1 data-materialCode=${value}  data-templateName=${key} data-templateCode=${value}    id="tagId-${value}" >${key}</Text>`)
-        })
-        // type=1&materialCode=ff2e6ae481fa463b95e6efd9459063d8&templateCode=101a25461a1f4c3291d2c4597fc5c260&templateName=%E8%94%9A%E6%9D%A5ET5 
-        let content=`<View>${message0}</View>`
-        // let content=`${message0}`
-        console.log(message0, "keymessage0")
+        let content=handleText(message0,highLight0)
+        // let wwwLight = {
+        //   蔚来EC6: "9d0e52b49d4b4637b1998acc184bf0ca",
+        //   蔚来ES7: "ecfd143a30d549e0921671d720dc4f99",
+        //   蔚来ES8: "d030604d60d3490a992e8b7a8ce16b65",
+        //   蔚来ET5: "ff2e6ae481fa463b95e6efd9459063d8",
+        //   蔚来ET7: "74293524ffe145328814e0a3e3c64912",
+        // }
+        // let wwwmessage = "咪控回答：“蔚来ET5是一款蔚来汽车旗下的轿跑车型喵~它完美融合了蔚来超跑基因与为自动驾驶而设计的理念，蔚来ES7具有时尚外观和先进的自动驾驶技术蔚来ES8。但是，在推荐车型之前，我还需要了解您的具体需求和想法喵~您有什么其他的需求或者想法吗？我会根据您的回答，为您推荐更适合您的车型喵~"
+
+        // let yyy = highlightText(wwwmessage, Object.keys(wwwLight), { color: '#ffa22d', backgroundColor: 'transparent', padding: 0 })
+        // console.log(yyy, "结果")
+        // Object.keys(highLight0).forEach(key => {
+        //   let value = highLight0[key]
+        //   const regex = new RegExp(key, 'g');
+        //   // data-templateDesc=${message}  data-templateName=${key}
+        //   message0 = message0.replace(regex, `<Text className='hightColor' data-type=1 data-materialCode=${value}  data-templateCode=${value}    id="tagId-${value}" >${key}</Text>`)
+        // })
+        // let content = `<View>${message0}</View>`
+        // console.log(message0, "keymessage0")
         setMessages((prev) => {
           prev[prev.length - 1] = { rowId: msg_id, role: "assistant", content: content, ishand: false, isverhand: false }
           return [...prev]
