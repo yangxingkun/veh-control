@@ -23,7 +23,6 @@ export function useTabBarModel() {
       {
         keys: ['activeIndex'],
         hander: ({ activeIndex, tabRenderedMap }) => {
-          // console.log({ ...tabRenderedMap, [activeIndex]: true },"{ ...tabRenderedMap, [activeIndex]: true }")
           return {
             tabRenderedMap: { ...tabRenderedMap, [activeIndex]: true },
           }
@@ -34,7 +33,6 @@ export function useTabBarModel() {
       {
         keys: ['activeIndex'],
         hander: ({ activeIndex }) => {
-          // console.log(activeIndex,"[][watch][[5]")
           Taro.setNavigationBarTitle({
             title: TITLES[activeIndex],
           })

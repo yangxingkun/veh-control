@@ -10,12 +10,21 @@ export function verifyChatCode({ code, user }) {
       }
     })
   }
-export function questionBychat({ question }) {
+export function questionBychat(data) {
     return request({
       method: 'POST',
       url: '/gpt/chat',
+      data
+    })
+  }
+export function updateBychat(id,status) {
+    return request({
+      method: 'POST',
+      url: `/gpt/message/update/${id}`,
       data: {
-        question,
+        status,
       }
     })
   }
+
+  

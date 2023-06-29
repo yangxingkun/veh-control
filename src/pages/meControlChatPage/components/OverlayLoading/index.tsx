@@ -2,9 +2,10 @@ import {  Overlay, Animate } from '@nutui/nutui-react-taro';
 const WrapperStyle = {
     display: 'flex',
     height: '100%',
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    paddingTop:'209px'
 }
 interface IProps {
     showLoading: boolean;
@@ -18,8 +19,8 @@ const Index = ({ showLoading }:IProps) => {
                         style={
                             {
                                 display: 'block',
-                                width: '51px',
-                                height: '51px'
+                                width: '54px',
+                                height: '68px'
                             }
                         }
                         src="http://152.136.205.136:9000/vehicle-control/font/Shape.svg"

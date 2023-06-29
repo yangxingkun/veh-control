@@ -11,6 +11,7 @@ interface IProps {
   motorcycleData?: IMotorcycleDataItem[];
 }
 const ParamsCard = ({ motorcycleData }: IProps) => {
+  debugger
   return (
     <>
       {motorcycleData?.map((motorcycleDataItem) => {

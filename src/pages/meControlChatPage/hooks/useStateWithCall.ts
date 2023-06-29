@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from 'react';
 /* 可以异步调用 */
 const useStateWithCall = (initValue) => {
   const ref = useRef(0);
-  const callFRef = useRef();
-  const setFuncRef = useRef();
+  const callFRef = useRef<any>();
+  const setFuncRef = useRef<any>();
   let [state, setState] = useState(initValue);
   if (!ref.current) {
     /*1. 进来之后添函数 */

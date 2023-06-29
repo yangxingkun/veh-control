@@ -67,6 +67,7 @@ const List = ({ visible }) => {
                 return (
                   <WaterfallItem index={index} key={item.materialCode} className="list-item">
                     <ListCard itemData={item} onClick={() => {
+                      console.log(item,"/pages/tagDetailPage/index")
                       Taro.navigateTo({
                         url: `/pages/tagDetailPage/index?type=${item.type}&materialCode=${item.materialCode}&templateCode=${item.templateCode}&templateName=${item.templateName}`
                       })

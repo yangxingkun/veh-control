@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import Taro from '@tarojs/taro';
-import { View, Text, Input, Button } from '@tarojs/components';
-import AddFriend from '@/components/AddFriend';
+import Taro, { useLoad } from '@tarojs/taro';
+import { View, Text, Button, Input } from '@tarojs/components';
 import { Dialog, Radio, Icon } from '@nutui/nutui-react-taro';
 import classNames from 'classnames';
 import { getToken } from '@/utils/token';
 import Redirect from '@/components/Redirect';
 import { verifyChatCode } from '@/api/chat'
 import { getUserInfo } from '@/utils/user';
+import { setVerify, getVerify } from '@/utils/chatVerify';
 import './index.scss';
 const CustomDialog = ({ isShow, setIsShow }) => {
   return (
@@ -16,34 +16,41 @@ const CustomDialog = ({ isShow, setIsShow }) => {
       title="内测码错误"
       textAlign="center"
       noCancelBtn={true}
+      noOkBtn={true}
       visible={isShow.show}
-      onOk={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}
-      // onCancel={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}
-      okText="我知道了"
-    // footerDirection="vertical"
     >
-      <div>
-        <div>请重新输入联系我们</div>
-        <div>获取内测码</div>
+      <div className='dialog-flex'>
+        <div style={{ marginTop: '11px' }}>请重新输入联系我们</div>
+        <div style={{ marginBottom: '26px' }}>获取内测码</div>
+        <Button onClick={() => setIsShow((pre) => ({ ...pre, ...{ show: false } }))}>我知道了</Button>
       </div>
     </Dialog>
   )
 }
 const List = ({ visible, myModel }) => {
- 
   const { isLogin, loginChecking } = myModel.useGetState();
   const token = getToken();
+  const verify = getVerify();
   const userInfo: any = getUserInfo()
   const [isShow, setIsShow] = useState({
     show: false,
     message: ''
   });
   const [value, setValue] = useState('8M6fzH');
+  // 
+  useEffect(() => {
+    if (visible&&verify) {
+      Taro.redirectTo({
+        url: `/pages/meControlChatPage/index?code=${verify}`,
+      });
+    }
+  }, [visible]);
   const handleModal = async () => {
     let { verified, message } = await verifyChatCode({ code: value, user: userInfo.userCode })
     switch (verified) {
       case true:
-        Taro.navigateTo({
+        setVerify(verified)
+        Taro.redirectTo({
           url: `/pages/meControlChatPage/index?code=${'1'}`,
         });
         break;
@@ -85,17 +92,20 @@ const List = ({ visible, myModel }) => {
           placeholder="请输入内测码"
           placeholderStyle="color:#95969F;font-size:12px"
         />
-        <Button type="primary" className="wrapper-button" onClick={handleModal}>
-          确定
+        <Button type="primary" className="wrapper-button" onClick={handleModal} hoverClass="wrapper-button-active">
+          确 定
         </Button>
-        <View className="mark">
-          {/* <Text className="mark-text"></Text> */}
-          <AddFriend
-            text="暂无内测码 请联系我们"
-            showDivider={false}
-            className="mark-customer-service"
-            icon={<Icon name="triangle-up" />}
-          />
+        <View className={classNames('contact')}>
+          <View className={classNames('contact-button')}>
+            <cell
+              styleType={1}
+              onStartmessage="startmessage"
+              onCompletemessage="completemessage"
+              plugid="689e7fc09d86da7200d62262f489b09b"
+            ></cell>
+          </View>
+          <Text className='contact-text'>暂无内测码?</Text>
+          <Text className='contact-customer_service'>联系我们</Text>
         </View>
       </div>
       <CustomDialog isShow={isShow} setIsShow={setIsShow} ></CustomDialog>
