@@ -83,7 +83,7 @@ const Index = () => {
       newData.map((item: any, index: number) => {
         if (index !== len - 1) {
           let value = hightKeyWords[matchWords?.[index]]
-          str += `${item}<Text className='hightColor' data-type=1 data-materialCode=${value}  data-templateCode=${value}    id="tagId-${value}" >${matchWords?.[index]}</Text>`
+          str += `${item}<Text className='hightColor' data-type=1 data-materialCode=${value}  data-templateCode=${value} data-templateName=${matchWords?.[index]}    id="tagId-${value}" >${matchWords?.[index]}</Text>`
         } else {
           str += item
         }
