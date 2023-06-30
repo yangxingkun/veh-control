@@ -29,7 +29,6 @@
   #chat-list {
     margin: 0 16px;
   }
-
   .user {
     display: flex;
     // justify-content: space-evenly;
@@ -37,28 +36,16 @@
     flex-direction: row-reverse;
 
   }
-
-  // .k_html {
-  //   .hightColor {
-  //     padding: 3px;
-  //     // color: #3388FF;
-  //     color: #f00;
-  //   }
-  // }
-
   .assistant {
     display: flex;
     justify-content: space-evenly;
   }
-
   .avatar {
     width: 30px;
     height: 30px;
-    // background-color: #fff;
     border-radius: 5px;
     margin-right: 5px;
   }
-
   .user-avatar {
     width: 30px;
     height: 30px;
@@ -66,11 +53,7 @@
     border-radius: 10px;
     margin-left: 5px;
   }
-
-
-
   .content {
-
     font-size: 14px;
     background-color: #fff;
     // padding: 15px 15px;
@@ -79,15 +62,7 @@
     word-break: break-all;
     user-select: text;
     -webkit-user-select: text;
-
   }
-  .hightcontent{
-    white-space: pre-wrap;
-    word-break: break-all;
-    user-select: text;
-    -webkit-user-select: text;
-  }
-
   .user .content {
     max-width: 80%;
     background-color: #3388FF;
@@ -109,12 +84,9 @@
       position: absolute;
       bottom: 12px;
       right: 12px;
-
-      // border: 1px solid #3388FF;
       .iconfont-hand_icon {
         background-color: transparent;
       }
-
       &-img {
         display: block;
         width: 17px;
@@ -123,7 +95,6 @@
       }
     }
   }
-
   .chatbox {
     width: 100%;
     box-sizing: border-box;
@@ -133,7 +104,6 @@
     height: 94px;
     padding: 6px 16px 40px 16px;
   }
-
   .chatbox-message {
     display: flex;
     justify-content: space-evenly;
@@ -156,5 +126,13 @@
     width: 31px;
     height: 31px;
     margin: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // .nut-icon::before {
+    //   width: 20px;
+    //   height: 20px;
+    // }
+
   }
 }

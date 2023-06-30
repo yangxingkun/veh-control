@@ -177,13 +177,15 @@ const Index = () => {
               show-confirm-bar={false}
               onKeyboardHeightChange={handleKeyboardHeightChange}
               maxlength={550} />
-            {
-              isLoading ? <Icon name="loading" className="send" ></Icon> : <img className="send" src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onTouchStart={(e) => {
-                e.preventDefault()
-                sendMessageService()
-              }} > </img>
-            }
 
+            <div className='send'>
+              {
+                isLoading ?<Icon name="loading"></Icon>:<img  src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onTouchStart={(e) => {
+                  e.preventDefault()
+                  sendMessageService()
+                }} > </img>
+              }
+            </div>
           </View>
         </View>
       </View>
