@@ -1,31 +1,41 @@
 // utils.tsx
 
-import React, {Fragment, CSSProperties, ReactNode } from "react";
+import React, { Fragment, CSSProperties, ReactNode } from 'react';
+import Taro from '@tarojs/taro';
 
 const regAtom = '^\\$.\\*+-?=!:|\\/()[]{}';
 
 // 关键词高亮
 export const highlightText = (
   text: string,
-  keywords: string | string[],
+  keywords: string | string[] | Record<string, any>,
   highlightStyle?: CSSProperties,
   ignoreCase?: boolean
 ): string | [] | ReactNode => {
-  debugger
   let keywordRegExp;
   if (!text) {
     return '';
   }
   // 把字符串类型的关键字转换成正则
   if (keywords) {
-    if (keywords instanceof Array) {
-      if (keywords.length === 0) {
-        return text;
+    if (typeof keywords === 'object') {
+      let keyWords : string[] | any = null;;
+      if (keywords instanceof Array) {
+        if (keywords.length === 0) {
+          return text;
+        }
+        keyWords = keywords;
+      } else if(keywords instanceof Object) {
+        if (Object.keys(keywords).length === 0) {
+          return text;
+        } else {
+          keyWords = Object.keys(keywords);
+        }
       }
       keywordRegExp = new RegExp(
-        (keywords as string[])
-          .filter(item => !!item)
-          .map(item => (regAtom.includes(item) ? '\\' + item : item))
+        (keyWords as string[])
+          .filter((item) => !!item)
+          .map((item) => (regAtom.includes(item) ? '\\' + item : item))
           .join('|'),
         ignoreCase ? 'ig' : 'g'
       );
@@ -33,21 +43,41 @@ export const highlightText = (
       keywordRegExp = new RegExp(keywords, ignoreCase ? 'ig' : 'g');
     }
   }
+
+  const clickText = (name, value) => {
+    console.log(name, value);
+    setTimeout(() => {
+      Taro.navigateTo({
+          url: `/pages/tagDetailPage/index?type=1&materialCode=${value}&templateCode=${value}&templateName=${name}`,
+      });
+  },30)
+  };
   if (text && keywordRegExp) {
     const newData = text.split(keywordRegExp); //  通过关键字的位置开始截取，结果为一个数组
-    console.log(newData,"[][newData")
+    console.log(newData, '[][newData');
     // eslint-disable-next-line
     const matchWords = text.match(keywordRegExp); // 获取匹配的文本
-    console.log(matchWords,"[][matchWords")
+    console.log(matchWords, '[][matchWords');
     const len = newData.length;
-
     return (
       <>
         {newData.map((item, index) => (
-        //   eslint-disable-next-line react/no-array-index-key
+          //   eslint-disable-next-line react/no-array-index-key
           <React.Fragment key={index}>
             {item}
-            {index !== len - 1 && <mark  style={highlightStyle}>{matchWords?.[index]}</mark>}
+            {index !== len - 1 && (
+              <mark
+                style={highlightStyle}
+                onClick={() => {
+                  clickText(
+                    matchWords?.[index],
+                    keywords[matchWords?.[index] as any]
+                  );
+                }}
+              >
+                {matchWords?.[index]}
+              </mark>
+            )}
           </React.Fragment>
         ))}
       </>
@@ -63,10 +93,11 @@ export type PropsIncludeChildren = {
 // 递归子组件
 export const highlightChildComponent = (
   item: PropsIncludeChildren,
-  keywords: string | [],
+  keywords: string | any[] | Record<string, any>,
   highlightStyle: CSSProperties,
   ignoreCase: boolean
-):any => {
+): any => {
+  // debugger
   if (typeof item === 'string') {
     return highlightText(item, keywords, highlightStyle, ignoreCase);
   }
@@ -75,7 +106,12 @@ export const highlightChildComponent = (
     const newItem = { ...item };
     newItem.props = {
       ...newItem.props,
-      children: highlightText(newItem.props.children as string, keywords, highlightStyle, ignoreCase)
+      children: highlightText(
+        newItem.props.children as string,
+        keywords,
+        highlightStyle,
+        ignoreCase
+      ),
     };
     return newItem;
   }
@@ -87,9 +123,14 @@ export const highlightChildComponent = (
       children: item.props?.children.map((child, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <React.Fragment key={index}>
-          {highlightChildComponent(child as PropsIncludeChildren, keywords, highlightStyle, ignoreCase)}
+          {highlightChildComponent(
+            child as PropsIncludeChildren,
+            keywords,
+            highlightStyle,
+            ignoreCase
+          )}
         </React.Fragment>
-      ))
+      )),
     };
     return newItem;
   }

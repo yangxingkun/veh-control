@@ -3,11 +3,11 @@ import { PropsIncludeChildren, highlightChildComponent } from "../../utils";
 import React from "react";
 
 export interface HighlightTextProp {
-    keywords: [] | string | null;
+    keywords: any[] | string | null | Record<string, any>;
     highlightStyle?: CSSProperties;
     ignoreCase?: boolean;
     children?: ReactElement;
-  }
+}
   
   const HighlightText: FC<HighlightTextProp> = ({
     keywords,

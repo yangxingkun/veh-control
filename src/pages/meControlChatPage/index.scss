@@ -78,6 +78,7 @@
     white-space: pre-wrap;
     word-break: break-all;
     user-select: text;
+    text-align: justify;
     -webkit-user-select: text;
 
   }
@@ -153,6 +154,7 @@
   }
 
   .send {
+    display: block;
     width: 31px;
     height: 31px;
     margin: 8px;

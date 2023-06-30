@@ -6,11 +6,11 @@ const Parse = ({ imgClick, node }) => {
     const hightLightClick = (props) => {
         console.log(props, "点激高亮")
         let { type = 1, templateName, materialCode, templateCode } = props
-        Taro.nextTick(() => {
+        setTimeout(() => {
             Taro.navigateTo({
                 url: `/pages/tagDetailPage/index?type=1&materialCode=${materialCode}&templateCode=${templateCode}&templateName=${templateName}`,
             });
-        })
+        },30)
         // Taro.navigateTo({
         //     url: `/pages/tagDetailPage/index?type=1&materialCode=26cd2b4696e04a1180082509feaf52d7&templateCode=24d0919c4d6d42c682bd0273d0f2af42&templateName=理想L9`,
         //   });
