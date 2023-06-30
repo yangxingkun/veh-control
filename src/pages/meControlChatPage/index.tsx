@@ -106,25 +106,6 @@ const Index = () => {
         let message0 = JSON.parse(JSON.stringify(message))
         let highLight0 = JSON.parse(JSON.stringify(high_light))
         let content=handleText(message0,highLight0)
-        // let wwwLight = {
-        //   蔚来EC6: "9d0e52b49d4b4637b1998acc184bf0ca",
-        //   蔚来ES7: "ecfd143a30d549e0921671d720dc4f99",
-        //   蔚来ES8: "d030604d60d3490a992e8b7a8ce16b65",
-        //   蔚来ET5: "ff2e6ae481fa463b95e6efd9459063d8",
-        //   蔚来ET7: "74293524ffe145328814e0a3e3c64912",
-        // }
-        // let wwwmessage = "咪控回答：“蔚来ET5是一款蔚来汽车旗下的轿跑车型喵~它完美融合了蔚来超跑基因与为自动驾驶而设计的理念，蔚来ES7具有时尚外观和先进的自动驾驶技术蔚来ES8。但是，在推荐车型之前，我还需要了解您的具体需求和想法喵~您有什么其他的需求或者想法吗？我会根据您的回答，为您推荐更适合您的车型喵~"
-
-        // let yyy = highlightText(wwwmessage, Object.keys(wwwLight), { color: '#ffa22d', backgroundColor: 'transparent', padding: 0 })
-        // console.log(yyy, "结果")
-        // Object.keys(highLight0).forEach(key => {
-        //   let value = highLight0[key]
-        //   const regex = new RegExp(key, 'g');
-        //   // data-templateDesc=${message}  data-templateName=${key}
-        //   message0 = message0.replace(regex, `<Text className='hightColor' data-type=1 data-materialCode=${value}  data-templateCode=${value}    id="tagId-${value}" >${key}</Text>`)
-        // })
-        // let content = `<View>${message0}</View>`
-        // console.log(message0, "keymessage0")
         setMessages((prev) => {
           prev[prev.length - 1] = { rowId: msg_id, role: "assistant", content: content, ishand: false, isverhand: false }
           return [...prev]

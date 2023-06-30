@@ -2,7 +2,7 @@ import { View } from '@tarojs/components';
 import { useLayoutEffect } from 'react';
 import './index.scss';
 import Taro from '@tarojs/taro';
-const Parse = ({ imgClick, node }) => {
+const Parse = ({ node }) => {
     const hightLightClick = (props) => {
         console.log(props, "点激高亮")
         let { type = 1, templateName, materialCode, templateCode } = props
@@ -11,9 +11,15 @@ const Parse = ({ imgClick, node }) => {
                 url: `/pages/tagDetailPage/index?type=1&materialCode=${materialCode}&templateCode=${templateCode}&templateName=${templateName}`,
             });
         })
-        // Taro.navigateTo({
-        //     url: `/pages/tagDetailPage/index?type=1&materialCode=26cd2b4696e04a1180082509feaf52d7&templateCode=24d0919c4d6d42c682bd0273d0f2af42&templateName=理想L9`,
-        //   });
+    }
+    // 点击图片放大
+    const imgClick = (e) => {
+        console.log(e, '点击放大')
+        if (!e) return false;
+        Taro.previewImage({
+            current: e,
+            urls: [e]
+        });
     }
     useLayoutEffect(() => {
         // 修改图片行内默认样式
@@ -45,10 +51,7 @@ const Parse = ({ imgClick, node }) => {
     }, [node]);
     return (
         <View className='parse'>
-            <View className='taro_html k_html content' dangerouslySetInnerHTML={{ __html: node}}></View>
-            {/* <View className='taro_html k_html content' >
-                {node?.props?.children}
-            </View> */}
+            <View className='taro_html k_html content' dangerouslySetInnerHTML={{ __html: node }}></View>
         </View>
     );
 };
