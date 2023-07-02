@@ -1,16 +1,21 @@
 import { View } from '@tarojs/components';
 import { useLayoutEffect } from 'react';
-import './index.scss';
 import Taro from '@tarojs/taro';
+import { query_templatecode } from "@/api/chat"
+import './index.scss';
+
 const Parse = ({ node }) => {
     const hightLightClick = (props) => {
         console.log(props, "点激高亮")
-        let { type = 1, templateName, materialCode, templateCode } = props
-        Taro.nextTick(() => {
+        let {  templateName, materialCode } = props
+        query_templatecode({ code: materialCode }).then(({template_code,type}) => {
+            // console.log(res, "[][][")
             Taro.navigateTo({
-                url: `/pages/tagDetailPage/index?type=1&materialCode=${materialCode}&templateCode=${templateCode}&templateName=${templateName}`,
+                url: `/pages/tagDetailPage/index?type=${type}&materialCode=${materialCode}&templateCode=${template_code}&templateName=${templateName}`,
             });
         })
+        // setTimeout(() => {
+        // },30)
     }
     // 点击图片放大
     const imgClick = (e) => {

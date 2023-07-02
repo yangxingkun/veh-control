@@ -4,15 +4,11 @@ import Taro from '@tarojs/taro';
 import PromptDialog from "./components/PromptDialog"
 import OverlayLoading from "./components/OverlayLoading"
 import ChatItemCard from "./components/ChatItemCard"
-// import HighlightText from "./components/HighlightText"
 import { Icon } from '@nutui/nutui-react-taro';
-// import useStateWithCall from "./hooks/useStateWithCall"
-
 import { useBottomInput } from "./hooks/useBottomInput"
 import { questionBychat } from '@/api/chat'
 import classNames from 'classnames';
 import { getUserInfo } from '@/utils/user';
-// import { highlightText } from "./utils"
 import './index.scss';
 
 
@@ -83,7 +79,7 @@ const Index = () => {
       newData.map((item: any, index: number) => {
         if (index !== len - 1) {
           let value = hightKeyWords[matchWords?.[index]]
-          str += `${item}<Text className='hightColor' data-type=1 data-materialCode=${value}  data-templateCode=${value} data-templateName=${matchWords?.[index]}    id="tagId-${value}" >${matchWords?.[index]}</Text>`
+          str += `${item}<Text className='hightColor' data-type=1 data-materialCode=${value}   data-templateName=${matchWords?.[index]}    id="tagId-${value}" >${matchWords?.[index]}</Text>`
         } else {
           str += item
         }

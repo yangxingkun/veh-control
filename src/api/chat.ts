@@ -26,5 +26,14 @@ export function updateBychat(id,status) {
       }
     })
   }
+export function query_templatecode({code}) {
+    return request({
+      method: 'POST',
+      url: `/gpt/query_templatecode`,
+      data: {
+        code,
+      }
+    })
+  }
 
   

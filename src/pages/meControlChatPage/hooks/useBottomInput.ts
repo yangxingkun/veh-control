@@ -179,8 +179,8 @@ export function useBottomInput() {
           placeHeight: placeHeightLastest,
         },
       };
-      // console.log(key,'调用次数o')
-      key>5&&handleFocusScrollToEnd();
+      console.log(key,'调用次数o')
+      key>4&&handleFocusScrollToEnd();
       setForceUpdate(key++);
     },
   };
