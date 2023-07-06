@@ -89,7 +89,8 @@ const Index = () => {
       return text
     }
   }
-  const sendMessageService = async () => {
+  const sendMessageService = async (e) => {
+    e.preventDefault()
     if (!/^\s*$/.test(value)) {
       setMessages((prev) => ([...prev, ...[{ "role": "user", "content": value, ishand: false, isverhand: false }, { "role": "assistant", "content": '...', ishand: false, isverhand: false }]]))
       setValue('')
@@ -177,8 +178,8 @@ const Index = () => {
             <div className='send'>
               {
                 isLoading ?<Icon name="loading"></Icon>:<img  src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onTouchStart={(e) => {
-                  e.preventDefault()
-                  sendMessageService()
+                  
+                  sendMessageService(e)
                 }} > </img>
               }
             </div>

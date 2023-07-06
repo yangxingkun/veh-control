@@ -1,5 +1,5 @@
 // import { ReactNode, useEffect, useLayoutEffect } from 'react';
-import { View} from '@tarojs/components';
+import { View } from '@tarojs/components';
 import handIconSvg from '@/assets/svg/hand_icon.svg';
 import handaIconSvg from '@/assets/svg/handa_icon.svg';
 import verhandIconSvg from '@/assets/svg/verhand_icon.svg';
@@ -11,6 +11,8 @@ import { updateBychat } from '@/api/chat'
 import HightLightContent from './HightLightContent'
 const Index = ({ index, item, messages, setMessages }) => {
   const supportClick = (e, index, item) => {
+    // e.stopPropagation()
+    // e.preventDefault()
     if (!item.rowId) return;
     let id = e.target.dataset?.id;
     if (id == 1) {
@@ -44,8 +46,6 @@ const Index = ({ index, item, messages, setMessages }) => {
       <View key={index} style={{ margin: '40px 0' }}>
         {
           item.role == 'user' && <View className="user" >
-            {/* <RichText className="content" nodes={item.content}></RichText>
-                         */}
             <View className="taro_html k_html content" dangerouslySetInnerHTML={{ __html: item.content }}>
             </View>
           </View>
@@ -54,7 +54,7 @@ const Index = ({ index, item, messages, setMessages }) => {
           item.role == 'assistant' && <View className="assistant" >
             <img className="avatar" src="http://152.136.205.136:9000/vehicle-control/font/Avatar%20ChatGPT.svg"></img>
             <View className="content" >
-              <HightLightContent  node={item.content}> </HightLightContent>
+              <HightLightContent node={item.content}> </HightLightContent>
               <View className='footer' onClick={(e) => {
                 supportClick(e, index, item)
               }}>

@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-import Taro, { useLoad } from '@tarojs/taro';
+import { useEffect, useState } from 'react';
+import Taro  from '@tarojs/taro';
 import { View, Text, Button, Input } from '@tarojs/components';
-import { Dialog, Radio, Icon } from '@nutui/nutui-react-taro';
+import { Dialog} from '@nutui/nutui-react-taro';
 import classNames from 'classnames';
 import { getToken } from '@/utils/token';
 import Redirect from '@/components/Redirect';
@@ -36,8 +36,8 @@ const List = ({ visible, myModel }) => {
     show: false,
     message: ''
   });
-  const [value, setValue] = useState('8M6fzH');
-  // 
+  const [value, setValue] = useState('');
+  // 8M6fzH
   useEffect(() => {
     if (visible&&verify) {
       Taro.redirectTo({
