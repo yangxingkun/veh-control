@@ -17,6 +17,7 @@ const SearchTipList = ({ visible, onClose, onSearch, searchTipModel, form }: IPr
   return (
     <Transition transitionName="fade-in" duration={300} visible={visible}>
       {(_, transitionClassName) => {
+        console.log(transitionClassName)
         return (
           <div className={classNames('search-tip-list', transitionClassName)}>
             <div className="wrapper">

@@ -1,5 +1,5 @@
 import { View } from '@tarojs/components';
-import { Tabbar, TabbarItem } from '@nutui/nutui-react-taro';
+import { Tabbar, TabbarItem,Icon } from '@nutui/nutui-react-taro';
 import List from './components/List';
 import MeControl from './components/MeControl';
 import My from './components/My';

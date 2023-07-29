@@ -130,7 +130,6 @@ const Index = () => {
     }
   }, [])
   return (
-
     <>
       <View className={classNames('mechat-page', showObj.showLoading ? 'mechat-hidden' : 'mechat-visible')}>
         <ScrollView
@@ -174,11 +173,9 @@ const Index = () => {
               show-confirm-bar={false}
               onKeyboardHeightChange={handleKeyboardHeightChange}
               maxlength={550} />
-
-            <div className='send'>
+            <div className='sendBox'>
               {
-                isLoading ?<Icon name="loading"></Icon>:<img  src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onTouchStart={(e) => {
-                  
+                true ?<Icon name="loading"></Icon>:<img  src="http://152.136.205.136:9000/vehicle-control/font/send.svg" onTouchStart={(e) => {
                   sendMessageService(e)
                 }} > </img>
               }

@@ -9,13 +9,10 @@ const Parse = ({ node }) => {
         console.log(props, "点激高亮")
         let {  templateName, materialCode } = props
         query_templatecode({ code: materialCode }).then(({template_code,type}) => {
-            // console.log(res, "[][][")
             Taro.navigateTo({
                 url: `/pages/tagDetailPage/index?type=${type}&materialCode=${materialCode}&templateCode=${template_code}&templateName=${templateName}`,
             });
         })
-        // setTimeout(() => {
-        // },30)
     }
     // 点击图片放大
     const imgClick = (e) => {

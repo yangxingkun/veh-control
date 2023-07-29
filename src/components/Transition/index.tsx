@@ -18,13 +18,15 @@ const Transition = ({
   duration = 300,
   ...props
 }: TransitionProps) => {
-
+  // debugger
   const propsRef = useLatest(props);
 
   const transitionModel = useModel<ITransitionState>({
     state: {
       status: ETransitionStatus.exited,
     },
+
+
   });
 
   const transitionClassNames = useMemo(() => {
@@ -50,7 +52,7 @@ const Transition = ({
   }, [transitionClassNames, status])
 
 
-  
+
   const transitionTimerRef = useRef<any>();
   const enteringTimerRef = useRef<any>();
   useEffect(() => {
@@ -126,6 +128,9 @@ const Transition = ({
     if (status === ETransitionStatus.exited) return null;
   }
   if (typeof children === 'function') {
+    // console.log(status, transitionClassNamesWithStatus[0], transitionClassNamesWithStatus)
+
+
     return children(status, transitionClassNamesWithStatus[0], transitionClassNamesWithStatus);
   }
   return children;
